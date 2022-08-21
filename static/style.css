@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    height: 100vh;
+}
+
+#headerTop {
+    padding: 10px;
+    padding-bottom: 20px;
+    font-family: monospace;
+    background-color: gray;
+    background-image: url("/headerTop.png");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+#headerTop a {
+    background-color: white;
+    color: gray;
+    padding: 3px;
+    margin: 2px;
+}
+
+#headerMain {
+    height: 60px;
+    margin: 15px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#headerMain * {
+    height: 100%;
+}
+
+#search {
+    background-image: url("/search.png");
+    background-size: cover;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 500px;
+    font-size: large;
+}
+
+#headerBottom  {
+    margin-left: 23%;
+}
+
+#headerBottom a {
+    color: #424242;
+    font-size: large;
+    text-decoration: none;
+    font-family: monospace;
+    margin-left: 23px;
+}
+
+h1 {
+    font-family: "Comic Sans MS";
+}
+
+main {
+    margin: 10px;
+    width: 50%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+}
+
+#footer {
+    padding: 10px;
+    padding-bottom: 20px;
+    font-family: monospace;
+    background-color: gray;
+    background-image: url("/footer.png");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: top;
+    width: 100%;
+}
+
+#footer a {
+    background-color: white;
+    color: gray;
+    padding: 3px;
+    margin: 2px;
+}
+
+#list a, #back {
+    color: white;
+    text-decoration: none;
+}
