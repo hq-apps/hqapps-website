@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Saffari Sans";
+    src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Saffari%20Sans.ttf");
+  }
+
 body {
     margin: 0;
     background-color: black;
@@ -59,7 +64,7 @@ body {
 }
 
 h1 {
-    font-family: "Comic Sans MS";
+    font-family: "Saffari Sans";
 }
 
 main {
