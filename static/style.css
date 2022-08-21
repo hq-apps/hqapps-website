@@ -84,8 +84,7 @@ main {
     background-image: url("/footer.png");
     background-size: contain;
     background-repeat: repeat-x;
-    background-position: top;
-    width: 100%;
+    background-position: top; 
 }
 
 #footer a {
