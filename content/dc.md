@@ -6,5 +6,5 @@ draft: false
 ---
 
 u :can: djoin ouR DISCROD att 
-[![DC](/joinn.png)](https://discord.com/invite/ejJXxGCktQ)
+[![DC](/joinn.png)](/chat)
 <iframe id="discord" src="https://discord.com/widget?id=980942825124413440&amp;theme=dark" allowtransparency="true" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" width="100" height="900" frameborder="0" style="filter: hue-rotate(80deg) invert();"></iframe>
