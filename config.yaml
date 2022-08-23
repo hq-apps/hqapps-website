@@ -1,8 +1,9 @@
-baseURL: 'http://example.org/'
+baseURL: 'http://hqapps.tk/'
 languageCode: 'en-us'
-title: 'My New Hugo Site'
+title: 'HQ Apps'
 
 markup:
   goldmark:
     renderer:
       unsafe: true
+      
