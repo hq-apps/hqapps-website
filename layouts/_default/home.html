@@ -1,3 +1,13 @@
 {{ define "main" }}
-    <h1>Home</h1>
+    <h1>MOST BEST!</h1>
+
+    <section class="slideshow">
+        {{ range $.Site.Data.homepage.mostbest.gudpages }}
+            <a href="{{ .URL }}">
+            <img src="{{ .img }}" alt="" class="background">
+            <div class="slide" >
+                <div class="infoarea"><h1>{{ .Title }}</h1> <p>{{ .Description }}</p></div></div>
+            </a>
+        {{ end }}
+    </section>
 {{ end }}
