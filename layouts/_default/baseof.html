@@ -15,6 +15,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Page.Title }} - {{ .Site.Title }}</title>
     <link rel="stylesheet" href="/style.css">
+    <script defer>
+
+      var titleText = ` ${document.title} `
+      titleText = titleText.padEnd(20, "_");
+      
+      function titleMarquee() {
+      
+       titleText = titleText.substring(1, titleText.length) + titleText.substring(0, 1);
+       document.title = titleText
+       
+       }
+
+       setInterval("titleMarquee()", 250);
+       
+      
+      </script>
 </head>
 <body>
     {{ partial "header" . }}
