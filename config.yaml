@@ -7,3 +7,9 @@ markup:
     renderer:
       unsafe: true
       
+outputFormats:
+  downloads:
+    baseName: dl
+    isPlainText: true
+    mediaType: text/html
+    path: dl

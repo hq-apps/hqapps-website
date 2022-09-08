@@ -2,12 +2,17 @@
     font-family: "Saffari Sans";
     src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Saffari%20Sans.ttf");
   }
+  @font-face {
+    font-family: "Sussy Sans";
+    src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Sussy%20Sans.ttf");
+  }
 
 body {
     margin: 0;
     background-color: black;
     color: white;
     height: 100vh;
+    font-family: "Sussy Sans";
 }
 
 #headerTop {
@@ -108,9 +113,11 @@ main {
     overflow-y: hidden;
     isolation: isolate;
     position: relative;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
 }
 
-.slideshow a, .slide {
+.slideshow > a, .slide {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
@@ -123,6 +130,7 @@ main {
 
 .slide {
     position: relative;
+    scroll-snap-align: center;
 }
 
 .slide .infoarea {
@@ -139,3 +147,27 @@ main {
     z-index: -999;
 }
 
+.slide-points {
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.slide-point {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.slide-point-active {
+    background-color: lime;
+}
+
+@media (max-width: 400px) {
+    main {
+        width: 100vw;
+    }    
+}

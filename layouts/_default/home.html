@@ -2,12 +2,23 @@
     <h1>MOST BEST!</h1>
 
     <section class="slideshow">
-        {{ range $.Site.Data.homepage.mostbest.gudpages }}
-            <a href="{{ .URL }}">
-            <img src="{{ .img }}" alt="" class="background">
-            <div class="slide" >
-                <div class="infoarea"><h1>{{ .Title }}</h1> <p>{{ .Description }}</p></div></div>
-            </a>
+        {{ range $index, $element := $.Site.Data.homepage.mostbest.gudpages }}
+            <!-- <a href="{{ .URL }}"> -->
+                <div class="slide">
+                    <div class="infoarea" id="slide-{{ $index }}">
+                        <h1>{{ .Title }}</h1>
+                        <p>{{ .Description }}</p>
+                    
+                        <div class="slide-points">
+                            {{ range $index2, $element2 := $.Site.Data.homepage.mostbest.gudpages }}
+                                <a href="#slide-{{ $index2 }}" class="slide-point {{ if eq $index $index2 }}slide-point-active{{ end }}"></a>
+                            {{ end }}
+                        </div>
+                   </div>
+                   <img src="{{ .img }}" alt="" class="background">
+                </div>
+            <!-- </a> -->
         {{ end }}
     </section>
+    <script src="/js/slideshow_scroll.js"></script>
 {{ end }}
