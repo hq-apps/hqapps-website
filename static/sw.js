@@ -29,7 +29,9 @@ const addResourcesToCache = async (resources) => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         fetch(event.request).catch(() => {
-            return caches.match("/offline.html");
+          console.log(event.request)
+          if(event.request.url.match(/.*hqapps.png/)) return caches.match("/hqapps.png");
+          return caches.match("/offline.html");
         })
     )
 });
