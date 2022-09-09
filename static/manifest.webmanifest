@@ -1,0 +1,10 @@
+{
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "name": "HQ Apps",
+    "short_name": "HQ Apps",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000",
+    "description": "HQ Apps maks bestt epps for ur life!!    ",
+    "icons": []
+  }
