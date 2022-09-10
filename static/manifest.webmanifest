@@ -6,6 +6,7 @@
     "id": "/",
     "display": "standalone",
     "background_color": "#000",
+    "theme_color": "#E68200",
     "description": "HQ Apps maks bestt epps for ur life!!    ",
     "icons": [{
       "src": "/icens/32.png",
