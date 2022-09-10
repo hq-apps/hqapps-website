@@ -58,6 +58,7 @@ body {
     background-color: #00000095;
     border-bottom: #80808032 1px solid;
     backdrop-filter: blur(8px) saturate(10);
+    overflow: hidden;
 }
 
 #search {
@@ -69,10 +70,6 @@ body {
     width: 500px;
     max-width: 50%;
     font-size: large;
-}
-
-#headerBottom  {
-    /*margin-left: 23%;*/
 }
 
 #headerBottom a {
