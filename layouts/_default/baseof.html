@@ -18,6 +18,13 @@
     <link rel="manifest" href="/manifest.webmanifest">
     <meta name="theme-color" content="#000">
     <link rel="apple-touch-icon" href="/icens/192.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ .Page.Title }}" />
+<meta property="og:url" content="{{ .Site.BaseURL }}{{ .Page.RelPermalink }}" />
+<meta property="og:image" content="{{ .Site.BaseURL }}hqapps.png" />
+    <meta name="description" content="HQ Apps maks bestt epps for ur life!!">
+    <meta name="og:description" content="HQ Apps maks bestt epps for ur life!!">
+    <meta name="og:site_name" content="{{ .Site.Title }}">
     <script defer>
 
       var titleText = ` ${document.title} `
