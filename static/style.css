@@ -9,7 +9,7 @@
 
 body {
     margin: 0;
-    background-color: black;
+    background-image: url("/bgstar.gif");
     color: white;
     height: 100vh;
     font-family: "Sussy Sans";
@@ -44,6 +44,7 @@ body {
     justify-content: space-between;
     width: 100%;
     max-width: 800px;
+    gap: 50px;
 }
 
 #headerMain * {
@@ -54,6 +55,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #00000095;
+    border-bottom: #80808032 1px solid;
+    backdrop-filter: blur(8px) saturate(10);
 }
 
 #search {
@@ -63,11 +67,12 @@ body {
     border: none;
     height: 30px;
     width: 500px;
+    max-width: 50%;
     font-size: large;
 }
 
 #headerBottom  {
-    margin-left: 23%;
+    /*margin-left: 23%;*/
 }
 
 #headerBottom a {
@@ -83,12 +88,18 @@ h1 {
 }
 
 main {
+    padding: 15px;
     margin: 10px;
-    width: 50%;
+    width: 60%;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     height: 100%;
+    background-color: #00000095;
+    border: #80808032 1px solid;
+    backdrop-filter: blur(8px) saturate(10);
+    box-sizing: border-box;
+    overflow: scroll;
 }
 
 #footer {
@@ -125,6 +136,7 @@ main {
     position: relative;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    cursor: none;
 }
 
 .slideshow > a, .slide {
@@ -176,8 +188,21 @@ main {
     background-color: lime;
 }
 
+#cursor {
+    position: fixed;
+    display: none;
+    cursor: none;
+}
+
 @media (max-width: 400px) {
+    #headerMain {
+        gap: 5px;
+    }
     main {
         width: 100vw;
-    }    
+        margin: 0;
+    }
+    #search {
+        display: none;
+    }
 }

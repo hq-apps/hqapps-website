@@ -4,7 +4,7 @@
     <section class="slideshow">
         {{ range $index, $element := $.Site.Data.homepage.mostbest.gudpages }}
             <!-- <a href="{{ .URL }}"> -->
-                <div class="slide">
+                <div class="slide" onclick="window.location.href = '{{ .URL }}'">
                     <div class="infoarea" id="slide-{{ $index }}">
                         <h1>{{ .Title }}</h1>
                         <p>{{ .Description }}</p>
@@ -20,5 +20,12 @@
             <!-- </a> -->
         {{ end }}
     </section>
+    
+    
     <script src="/js/slideshow_scroll.js"></script>
+    <script src="/js/cursor.js" defer></script>
+{{ end }}
+
+{{ define "extra" }}
+<div id="cursor"><img src="/clickhere.gif" alt=""></div>
 {{ end }}
