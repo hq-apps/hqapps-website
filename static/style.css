@@ -213,3 +213,18 @@ main {
         display: none;
     }
 }
+
+.gform {
+    display: flex;
+    flex-direction: column;
+    color-scheme: dark;
+}
+
+.gform > * {
+    padding: 8px;
+    margin: 4px;
+}
+
+.gform #msg {
+    height: 50vh;
+}
