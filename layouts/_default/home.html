@@ -3,21 +3,22 @@
 
     <section class="slideshow">
         {{ range $index, $element := $.Site.Data.homepage.mostbest.gudpages }}
-            <!-- <a href="{{ .URL }}"> -->
-                <div class="slide" onclick="window.location.href = '{{ .URL }}'">
+        <div class="slide-wrapper">
+            <a href="{{ .URL }}">
+                <div class="slide" onlick="window.location.href = '{{ .URL }}'" onclick="console.log('hi')">
                     <div class="infoarea" id="slide-{{ $index }}">
                         <h1>{{ .Title }}</h1>
                         <p>{{ .Description }}</p>
-                    
-                        <div class="slide-points">
-                            {{ range $index2, $element2 := $.Site.Data.homepage.mostbest.gudpages }}
-                                <a href="#slide-{{ $index2 }}" class="slide-point {{ if eq $index $index2 }}slide-point-active{{ end }}"></a>
-                            {{ end }}
-                        </div>
                    </div>
                    <img src="{{ .img }}" alt="" class="background">
                 </div>
-            <!-- </a> -->
+            </a>
+            <div class="slide-points">
+                            {{ range $index2, $element2 := $.Site.Data.homepage.mostbest.gudpages }}
+                                <a href="#slide-{{ $index2 }}" class="slide-point {{ if eq $index $index2 }}slide-point-active{{ end }}" onclick="e.stopPropergation()"></a>
+                            {{ end }}
+            </div>
+        </div>
         {{ end }}
     </section>
     

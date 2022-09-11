@@ -136,7 +136,11 @@ main {
     cursor: none;
 }
 
-.slideshow > a, .slide {
+.slide-wrapper > a {
+    cursor: none;
+}
+
+.slideshow .slide-wrapper, .slide {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
@@ -144,7 +148,6 @@ main {
     background-repeat: no-repeat;
     background-size: 100%;
     color: white;
-    
 }
 
 .slide {
@@ -166,11 +169,18 @@ main {
     z-index: -999;
 }
 
+.slide-wrapper {
+    position: relative;
+}
+
 .slide-points {
+    position: absolute;
     width: 100%;
     height: 10px;
     display: flex;
     justify-content: center;
+    left: 0;
+    bottom: 0;
 }
 
 .slide-point {
