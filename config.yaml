@@ -2,6 +2,8 @@ baseURL: 'http://hqapps.tk/'
 languageCode: 'en-us'
 title: 'HQ Apps'
 
+theme: "hqapps"
+
 markup:
   goldmark:
     renderer:
