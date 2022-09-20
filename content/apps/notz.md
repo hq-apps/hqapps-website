@@ -3,7 +3,7 @@ title: Notz
 date: 2022-09-08T17:57:07+02:00
 draft: false
 description: Cuul Epp
-icon: /hqapps.png
+icon: /notz.png
 screenshots: [/notz.ong.png, /hqapps.png]
 ---
 

@@ -7,9 +7,9 @@
     overflow-y: hidden;
     isolation: isolate;
     position: relative;
+    cursor: none;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    cursor: none;
 }
 
 
@@ -23,8 +23,7 @@
     color: white;
     overflow: hidden;
 }
-
-.slide {
+.slide-wrapper {
     scroll-snap-align: center;
 }
 
