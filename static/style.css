@@ -91,7 +91,6 @@ main {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    height: 100%;
     background-color: #00000095;
     border: #80808032 1px solid;
     backdrop-filter: blur(8px) saturate(10);
