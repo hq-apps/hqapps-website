@@ -96,7 +96,7 @@ main {
     border: #80808032 1px solid;
     backdrop-filter: blur(8px) saturate(10);
     box-sizing: border-box;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 
 #footer {
