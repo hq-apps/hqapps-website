@@ -1,25 +1,28 @@
 {{ define "main" }}
 <a href=".." id="back">< BECK!</a>
-    <article>
-         <section class="slideshow">
-        {{ range $index, $element := .Params.images }}
+<article>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Params.description }}</p>
+    <section class="slideshow">
+        {{ range $index, $element := .Params.screenshots }}
         <div class="slide-wrapper">
-            <a href="{{ .URL }}">
-                <div class="slide" onlick="window.location.href = '{{ .URL }}'">
-                    <div class="infoarea" id="slide-{{ $index }}">
-                        <h1>{{ .Title }}</h1>
-                        <p>{{ .Description }}</p>
-                   </div>
-                   <img src="{{ .img }}" alt="" class="background">
+            <a href="{{ . }}" style="cursor: pointer;">
+                <div class="slide">
+                    <img src="{{ . }}" alt="" class="background">
                 </div>
             </a>
             <div class="slide-points">
-                            {{ range $index2, $element2 := $.Site.Data.homepage.mostbest.gudpages }}
-                                <a href="#slide-{{ $index2 }}" class="slide-point {{ if eq $index $index2 }}slide-point-active{{ end }}"></a>
-                            {{ end }}
+                {{ range $index2, $element2 := $.Params.screenshots }}
+                <a href="#slide-{{ $index2 }}"
+                    class="slide-point {{ if eq $index $index2 }}slide-point-active{{ end }}"></a>
+                {{ end }}
             </div>
         </div>
         {{ end }}
+
+
     </section>
-    </article>
+    {{ .Content }}
+</article>
+        
 {{ end }}

@@ -108,6 +108,10 @@ main {
     background-size: contain;
     background-repeat: repeat-x;
     background-position: top; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 #footer a {
