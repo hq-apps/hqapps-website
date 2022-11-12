@@ -21,6 +21,10 @@
       "sizes": "64x64",
       "type": "image/png"
     },{
+      "src": "/icens/96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },{
       "src": "/icens/128.png",
       "sizes": "128x128",
       "type": "image/png"
