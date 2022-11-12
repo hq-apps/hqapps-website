@@ -1,8 +1,20 @@
 {{ define "main" }}
 <a href=".." id="back">< BECK!</a>
 <article>
-    <h1>{{ .Title }}</h1>
-    <p>{{ .Params.description }}</p>
+    <div id="app-page-row-1">
+        <section id="app-info">
+            <div class="app-page-image-wrapper">
+                <img src="{{ .Params.icon }}" alt="">
+            </div>
+            <div>
+                <h1>{{ .Title }}</h1>
+                <p>{{ .Params.description }}</p>
+            </div>
+        </section>
+        <div id="app-page-button-wrapper">
+            <button class="dlbutton">Download</button>
+        </div>
+    </div>
     <section class="slideshow">
         {{ range $index, $element := .Params.screenshots }}
         <div class="slide-wrapper">
@@ -22,7 +34,11 @@
 
 
     </section>
-    {{ .Content }}
+    <section class="app-about">
+        <h1>About App</h1>
+        <div class="app-about-text">{{ .Content }}</div>
+    </section>
+    
 </article>
         
 {{ end }}

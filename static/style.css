@@ -1,11 +1,12 @@
 @font-face {
     font-family: "Saffari Sans";
     src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Saffari%20Sans.ttf");
-  }
-  @font-face {
+}
+
+@font-face {
     font-family: "Sussy Sans";
     src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Sussy%20Sans.ttf");
-  }
+}
 
 body {
     margin: 0;
@@ -106,7 +107,7 @@ main {
     background-image: url("/footer.png");
     background-size: contain;
     background-repeat: repeat-x;
-    background-position: top; 
+    background-position: top;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -120,7 +121,8 @@ main {
     margin: 2px;
 }
 
-#list a, #back {
+#list a,
+#back {
     color: white;
     text-decoration: none;
 }
@@ -139,11 +141,12 @@ main {
     cursor: none;
 }
 
-.slide-wrapper > a {
+.slide-wrapper>a {
     cursor: none;
 }
 
-.slideshow .slide-wrapper, .slide {
+.slideshow .slide-wrapper,
+.slide {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
@@ -161,7 +164,7 @@ main {
 .slide .infoarea {
     position: absolute;
     bottom: 0;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6));
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
     width: 100%;
 }
 
@@ -204,18 +207,7 @@ main {
     cursor: none;
 }
 
-@media (max-width: 400px) {
-    #headerMain {
-        gap: 5px;
-    }
-    main {
-        width: 100vw;
-        margin: 0;
-    }
-    #search {
-        display: none;
-    }
-}
+
 
 .gform {
     display: flex;
@@ -223,11 +215,153 @@ main {
     color-scheme: dark;
 }
 
-.gform > * {
+.gform>* {
     padding: 8px;
     margin: 4px;
 }
 
 .gform #msg {
     height: 50vh;
+}
+
+#app-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#app-info img {
+    max-height: 192px;
+    border-radius: 16px;
+    width: 100%;
+}
+
+
+.dlbutton {
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 15px;
+    border: solid 1px #726c00;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font: 25px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #fffde5;
+    background-color: #c79b3b;
+    background-image: -moz-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    background-image: -webkit-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    background-image: -o-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    background-image: -ms-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a57919', endColorstr='#a57919', GradientType=0);
+    background-image: linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    -webkit-box-shadow: 0px 20px 20px #000, inset 0px 0px 3px #ffffff;
+    -moz-box-shadow: 0px 20px 20px #000, inset 0px 0px 3px #ffffff;
+    box-shadow: 0px 20px 20px #000, inset 0px 0px 3px #ffffff;
+
+    -webkit-transition: all 0.15s linear;
+    -moz-transition: all 0.15s linear;
+    -o-transition: all 0.15s linear;
+    transition: all 0.15s linear;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    margin: 25px;
+}
+
+.dlbutton:active {
+    padding: 15px 15px;
+    border: solid 1px #726500;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font: 25px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ffffe5;
+    background-color: #8c6b12;
+    background-image: -moz-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    background-image: -webkit-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    background-image: -o-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    background-image: -ms-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c99418', endColorstr='#c99418', GradientType=0);
+    background-image: linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    -webkit-box-shadow: 0px 0px -20px #000000, inset 5px 10px 11px #8f8f8f;
+    -moz-box-shadow: 0px 0px -20px #000000, inset 5px 10px 11px #8f8f8f;
+    box-shadow: 0px 0px -20px #000000, inset 5px 10px 11px #8f8f8f;
+
+}
+
+.dlbutton:hover {
+    padding: 15px 15px;
+    border: solid 1px #3b350a;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font: 25px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #fffde5;
+    background-color: #b88909;
+    background-image: -moz-linear-gradient(top, #b88909 0%, #a37200 100%);
+    background-image: -webkit-linear-gradient(top, #b88909 0%, #a37200 100%);
+    background-image: -o-linear-gradient(top, #b88909 0%, #a37200 100%);
+    background-image: -ms-linear-gradient(top, #b88909 0%, #a37200 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a37200', endColorstr='#a37200', GradientType=0);
+    background-image: linear-gradient(top, #b88909 0%, #a37200 100%);
+    -webkit-box-shadow: 0px 20px 20px #000, inset 0px 0px 5px #ffffff;
+    -moz-box-shadow: 0px 20px 20px #000, inset 0px 0px 5px #ffffff;
+    box-shadow: 0px 20px 20px #000, inset 0px 0px 5px #ffffff;
+
+    text-shadow: 0px 0px 10px #a3a3a3;
+    filter: dropshadow(color=#2e2e2e, offx=0, offy=0);
+    transform: translateY(-2px);
+}
+
+#app-page-row-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#app-page-button-wrapper {
+    position: relative;
+}
+
+.app-about-text {
+    font-size: 0.8em;
+}
+
+.app-page-image-wrapper {
+    max-width: 35%;
+    margin-right: 16px;
+}
+
+
+@media (max-width: 800px) {
+    #headerMain {
+        gap: 5px;
+    }
+
+    main {
+        width: 100vw;
+        margin: 0;
+    }
+
+    #search {
+        display: none;
+    }
+
+    #app-page-row-1 {
+        flex-direction: column;
+    }
+
+    #app-page-button-wrapper {
+        position: unset;
+    }
+
+    .dlbutton {
+        position: static;
+        margin: 0;
+        margin-bottom: 25px;
+        width: 100%;
+    }
 }
