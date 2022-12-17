@@ -1,0 +1,68 @@
+---
+title: "Winterland"
+date: 2022-12-17T13:29:14+01:00
+draft: false
+---
+
+<h1>HQ WINTER LAND SERVER</h1>
+<p>HQ winter lend is gud server!! but u ned tu start urself!! NO WORRI!! DOWN below u can sii if start end u cen sii ip tu!s</p>
+
+<div style="text-align: center;">
+    <h2 id="server-status"></h2>
+
+    <button class="dlbutton no" style="display: none;" onclick="startServer()">START!!!!!!!!!!!!!!</button>
+</div>
+
+<script>
+    const serverStatus = document.querySelector("#server-status")
+    const startBtn = document.querySelector(".dlbutton")
+    const ApiBase = "https://winterlandapi.hqapps.tk"
+
+    setInterval(() => window.location.reload(), 5000)
+
+    async function setServerStatusText() {
+        const status = await getServerStatus()
+        console.log(status.status)
+        switch (status.status) {
+            case "offline":
+                serverStatus.textContent = "serve off!"
+                startBtn.style.display = "block"
+                break
+            case "preparing":
+                serverStatus.textContent = "serve is preper!"
+                break
+            case "loading":
+                serverStatus.textContent = "serve is load!"
+                break
+            case "starting":
+                serverStatus.textContent = "serve is start!!!"
+                break
+            case "stopping":
+                serverStatus.textContent = "serve is STOPPINK!!!!!!!"
+                break
+            case "online":
+                serverStatus.textContent = "serve is ONLIN!!!! YEY!!"
+                break
+            case "saving":
+                serverStatus.textContent = "serve is SAV!!!! PLZ WAIT!!!"
+                break
+            default:
+                serverStatus.textContent = status.status
+                break
+        }
+        
+    }
+
+    async function getServerStatus() {
+        const response = await fetch(`${ApiBase}/status`);
+        const text = await response.json();
+        return text
+    }
+
+    async function startServer() {
+        const response = await fetch(`${ApiBase}/start`);
+        window.location.reload()
+    }
+
+    setServerStatusText()
+</script>
