@@ -13,7 +13,7 @@ draft: false
 ### MineCraft Version: 1.19.3 Vanilla
 
 <p style="text-align: center;">
-<a href="http://www.mediafire.com/file/tjefjjmq52ow37m/winterland.zip">
+<a href="https://www.mediafire.com/file/drtfwq6ayxxea07/winterland.zip/file" target="_blank">
 <button class="dlbutton no">download world!!</button>
 </a>
 </p>
