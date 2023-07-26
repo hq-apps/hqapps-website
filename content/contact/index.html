@@ -14,8 +14,21 @@ fullTitle: "Contact HQ Apps!"
 <label for="msg">message:</label>
 <textarea name="massage" id="msg" required pattern=".{25,}" placeholder="ur mesage: 25 min lonk!!!"></textarea>
 
+<div class="h-captcha" data-sitekey="774e458f-e780-400e-b5f4-1e6ca5bb61c4"></div>
+<div class="frc-captcha" data-sitekey="FCMNFUFD4JA1AIN3"></div>
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAAH5_kB885SVIdRY" data-callback="javascriptCallback"></div>
+
 <button type="submit">SEND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</button>
 
 </form>
 
 <script src="/js/contact.js" defer></script>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.12/widget.module.min.js"
+  async
+  defer
+></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.12/widget.min.js" async defer></script>
+
