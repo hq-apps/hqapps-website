@@ -5,7 +5,7 @@ draft: false
 fullTitle: "Contact HQ Apps!"
 ---
 
-<form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbx_cOdTWirdfdP82zya6u0ksgft8Knp8euaKmutrmvHGBy3wG3oUsKb8pOqbhBUQ11n3A/exec">
+<form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbz1AktUXEyZyREUzBsrPpN369hFJ5sTdgha960fYF7gTWYQW4y8f58Mck9_AC3ImDm8GQ/exec">
 
 <label for="email">email:</label>
 <input type="email" name="email" id="email" required pattern=".+@.+\..+" placeholder="wii ned dis tu repli!!">
@@ -14,8 +14,21 @@ fullTitle: "Contact HQ Apps!"
 <label for="msg">message:</label>
 <textarea name="massage" id="msg" required pattern=".{25,}" placeholder="ur mesage: 25 min lonk!!!"></textarea>
 
+<div class="h-captcha" data-sitekey="774e458f-e780-400e-b5f4-1e6ca5bb61c4"></div>
+<div class="frc-captcha" data-sitekey="FCMNFUFD4JA1AIN3"></div>
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAAH5_kB885SVIdRY"></div>
+
 <button type="submit">SEND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</button>
 
 </form>
 
 <script src="/js/contact.js" defer></script>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.12/widget.module.min.js"
+  async
+  defer
+></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.12/widget.min.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
