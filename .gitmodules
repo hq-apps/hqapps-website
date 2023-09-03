@@ -4,4 +4,4 @@
 [submodule "themes/hq-old-theme"]
 	path = themes/hq-old-theme
 	url = https://github.com/hq-apps/hq-hugo-theme.git
-	branch = olddesign2022
+	branch = 8296803fb5d7db9d43e1ad8061e011249fc71923
