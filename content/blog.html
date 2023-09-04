@@ -14,11 +14,23 @@ draft: false
         height: 100vh;
         width: 100vw;
     }
+    
+    body.old main {
+        transform: none;
+        left: 0;
+        width: auto;
+        height: 80vh;
+    }
 
     @media (min-width: 993px) {
         iframe {
             left: 300px;
             width: calc(100vw - 300px);
         }
+    }
+
+    body.old main iframe {
+        left: 0;
+        width: 100%;
     }
 </style>
