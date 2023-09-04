@@ -1,0 +1,372 @@
+@font-face {
+    font-family: "Saffari Sans";
+    src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Saffari%20Sans.ttf");
+}
+
+@font-face {
+    font-family: "Sussy Sans";
+    src: url("https://raw.githubusercontent.com/hq-apps/saffari-sans/main/Sussy%20Sans.ttf");
+}
+
+body {
+    margin: 0;
+    background-image: url("/bgstar.gif");
+    color: white;
+    height: 100vh;
+    font-family: "Sussy Sans";
+}
+
+#headerTop {
+    padding: 10px;
+    padding-bottom: 20px;
+    font-family: monospace;
+    background-color: gray;
+    background-image: url("/headerTop.png");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#headerTop a {
+    background-color: white;
+    color: gray;
+    padding: 3px;
+    margin: 2px;
+}
+
+#headerMain {
+    height: 60px;
+    margin: 15px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    gap: 50px;
+}
+
+#headerMain * {
+    height: 100%;
+}
+
+#header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00000095;
+    border-bottom: #80808032 1px solid;
+    backdrop-filter: blur(8px) saturate(10);
+    overflow: hidden;
+}
+
+#search {
+    background-image: url("/search.png");
+    background-size: cover;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 500px;
+    max-width: 50%;
+    font-size: large;
+}
+
+#headerBottom a {
+    color: #424242;
+    font-size: large;
+    text-decoration: none;
+    font-family: monospace;
+    margin-left: 23px;
+}
+
+h1 {
+    font-family: "Saffari Sans";
+}
+
+main {
+    padding: 15px;
+    margin: 10px;
+    width: 60%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #00000095;
+    border: #80808032 1px solid;
+    backdrop-filter: blur(8px) saturate(10);
+    -webkit-backdrop-filter: blur(8px) saturate(10);
+    box-sizing: border-box;
+    overflow-x: scroll;
+}
+
+#footer {
+    padding: 10px;
+    padding-bottom: 20px;
+    font-family: monospace;
+    background-color: gray;
+    background-image: url("/footer.png");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: top;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer a {
+    background-color: white;
+    color: gray;
+    padding: 3px;
+    margin: 2px;
+}
+
+#list a,
+#back {
+    color: white;
+    text-decoration: none;
+}
+
+.slideshow {
+    width: 100%;
+    height: 500px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    isolation: isolate;
+    position: relative;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: none;
+}
+
+.slide-wrapper>a {
+    cursor: none;
+}
+
+.slideshow .slide-wrapper,
+.slide {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+}
+
+.slide {
+    position: relative;
+    scroll-snap-align: center;
+}
+
+.slide .infoarea {
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+    width: 100%;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -999;
+}
+
+.slide-wrapper {
+    position: relative;
+}
+
+.slide-points {
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    bottom: 0;
+}
+
+.slide-point {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.slide-point-active {
+    background-color: lime;
+}
+
+#cursor {
+    position: fixed;
+    display: none;
+    cursor: none;
+}
+
+
+
+.gform {
+    display: flex;
+    flex-direction: column;
+    color-scheme: dark;
+}
+
+.gform>* {
+    padding: 8px;
+    margin: 4px;
+}
+
+.gform #msg {
+    height: 50vh;
+}
+
+#app-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#app-info img {
+    max-height: 192px;
+    border-radius: 16px;
+    width: 100%;
+}
+
+
+.dlbutton {
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 15px;
+    border: solid 1px #726c00;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font: 25px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #fffde5;
+    background-color: #c79b3b;
+    background-image: -moz-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    background-image: -webkit-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    background-image: -o-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    background-image: -ms-linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a57919', endColorstr='#a57919', GradientType=0);
+    background-image: linear-gradient(top, #c79b3b 0%, #a57919 100%);
+    -webkit-box-shadow: 0px 20px 20px #000, inset 0px 0px 3px #ffffff;
+    -moz-box-shadow: 0px 20px 20px #000, inset 0px 0px 3px #ffffff;
+    box-shadow: 0px 20px 20px #000, inset 0px 0px 3px #ffffff;
+
+    -webkit-transition: all 0.15s linear;
+    -moz-transition: all 0.15s linear;
+    -o-transition: all 0.15s linear;
+    transition: all 0.15s linear;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    margin: 25px;
+}
+
+.no {
+    position:static;
+}
+
+.dlbutton:active {
+    padding: 15px 15px;
+    border: solid 1px #726500;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font: 25px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ffffe5;
+    background-color: #8c6b12;
+    background-image: -moz-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    background-image: -webkit-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    background-image: -o-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    background-image: -ms-linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c99418', endColorstr='#c99418', GradientType=0);
+    background-image: linear-gradient(top, #8c6b12 0%, #c99418 100%);
+    -webkit-box-shadow: 0px 0px -20px #000000, inset 5px 10px 11px #8f8f8f;
+    -moz-box-shadow: 0px 0px -20px #000000, inset 5px 10px 11px #8f8f8f;
+    box-shadow: 0px 0px -20px #000000, inset 5px 10px 11px #8f8f8f;
+
+}
+
+.dlbutton:hover {
+    padding: 15px 15px;
+    border: solid 1px #3b350a;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font: 25px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #fffde5;
+    background-color: #b88909;
+    background-image: -moz-linear-gradient(top, #b88909 0%, #a37200 100%);
+    background-image: -webkit-linear-gradient(top, #b88909 0%, #a37200 100%);
+    background-image: -o-linear-gradient(top, #b88909 0%, #a37200 100%);
+    background-image: -ms-linear-gradient(top, #b88909 0%, #a37200 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a37200', endColorstr='#a37200', GradientType=0);
+    background-image: linear-gradient(top, #b88909 0%, #a37200 100%);
+    -webkit-box-shadow: 0px 20px 20px #000, inset 0px 0px 5px #ffffff;
+    -moz-box-shadow: 0px 20px 20px #000, inset 0px 0px 5px #ffffff;
+    box-shadow: 0px 20px 20px #000, inset 0px 0px 5px #ffffff;
+
+    text-shadow: 0px 0px 10px #a3a3a3;
+    filter: dropshadow(color=#2e2e2e, offx=0, offy=0);
+    transform: translateY(-2px);
+}
+
+#app-page-row-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#app-page-button-wrapper {
+    position: relative;
+}
+
+.app-about-text {
+    font-size: 0.8em;
+}
+
+.app-page-image-wrapper {
+    max-width: 35%;
+    margin-right: 16px;
+}
+
+
+@media (max-width: 800px) {
+    #headerMain {
+        gap: 5px;
+    }
+
+    main {
+        width: 100vw;
+        margin: 0;
+    }
+
+    #search {
+        display: none;
+    }
+
+    #app-page-row-1 {
+        flex-direction: column;
+    }
+
+    #app-page-button-wrapper {
+        position: unset;
+    }
+
+    .dlbutton {
+        position: static;
+        margin: 0;
+        margin-bottom: 25px;
+        width: 100%;
+    }
+}

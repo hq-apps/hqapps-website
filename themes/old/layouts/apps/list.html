@@ -1,0 +1,13 @@
+{{ define "main" }}
+<a href=".." id="back">< BECK!</a>
+    <h1>{{ .Page.Title }}</h1>
+
+    {{ .Content }}
+
+    <div id="list" class="auto-grid">
+        {{ range .Pages }}
+            <div><img src="{{ .Params.icon }}"></img><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        {{ end }}
+    </div>
+    
+{{ end }}
