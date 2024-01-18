@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div class="w3-container" style="margin-top:80px">
+    <h1 class="w3-jumbo"><b>HQ APPS</b></h1>
+    <h2 class="w3-xxxlarge w3-text-red"><b>MOST BEST</b></h2>
+  </div>
+
+    <section class="slideshow">
+        {{ range $index, $element := $.Site.Data.homepage.mostbest.gudpages }}
+        <div class="slide-wrapper">
+            <a href="{{ .URL }}">
+                <div class="slide" onlick="window.location.href = '{{ .URL }}'">
+                    <div class="infoarea" id="slide-{{ $index }}">
+                        <h1>{{ .Title }}</h1>
+                        <p>{{ .Description }}</p>
+                   </div>
+                   <img src="{{ .img }}" alt="" class="background">
+                </div>
+            </a>
+            <div class="slide-points">
+                            {{ range $index2, $element2 := $.Site.Data.homepage.mostbest.gudpages }}
+                                <a href="#slide-{{ $index2 }}" class="slide-point {{ if eq $index $index2 }}slide-point-active{{ end }}"></a>
+                            {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </section>
+
+    <section>
+        <h2>HEPPY usars</h2>
+        <div class="auto-grid">
+            <img src="/reviw1.png" alt="gud edsign">
+            <img src="/reviw2.png" alt="cool" width="400px">
+            <img src="/reviw3.png" alt="yooooossss">
+            <img src="/reviw4.png" alt="best browser">
+            <img src="/reviw5png.bmp" alt="I lov saffari">
+            <img src="/reviw6.png" alt="👍">
+            <img src="/reviw7.png" alt="top happy developer">
+        </div>
+    </section>
+    
+    
+    <script src="/js/slideshow_scroll.js"></script>
+    <script src="/js/cursor.js" defer></script>
+{{ end }}
+
+{{ define "extra" }}
+<div id="cursor"><img src="/clickhere.gif" alt=""></div>
+{{ end }}
