@@ -6,7 +6,7 @@
 
     <div id="list" class="auto-grid">
         {{ range .Pages }}
-            <div><img src="{{ .Params.icon }}"></img><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <a href="{{ .RelPermalink }}"><div class="app-list-entry"><img src="{{ .Params.icon }}" class="app-list-image"></img><span>{{ .Title }}</span></div></a>
         {{ end }}
     </div>
     

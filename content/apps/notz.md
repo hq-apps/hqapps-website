@@ -5,6 +5,7 @@ draft: false
 description: Cuul Epp
 icon: /notz.png
 screenshots: [/notz.ong.png, /hqapps.png]
+download: https://hqdl.tk/notz/
 ---
 
 # notz

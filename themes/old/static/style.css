@@ -370,3 +370,15 @@ main {
         width: 100%;
     }
 }
+
+.app-list-image {
+    height: 128px;
+    border-radius: 8px;
+}
+
+.app-list-entry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px;
+}
