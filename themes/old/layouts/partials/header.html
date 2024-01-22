@@ -9,9 +9,52 @@
     </div>
     <div id="headerMain">
         <a href="/"><img src="/hqapps.png" alt=""></a>
-        <input type="text" id="search">
+        <form action="https://duckduckgo.com/" id="searchForm">
+            <input type="text" id="search" name="q">
+            <input type="hidden" name="kae" value="d">
+            <input type="hidden" name="kp" value="-2">
+            <input type="hidden" name="kz" value="-1">
+            <input type="hidden" name="kav" value="1">
+            <input type="hidden" name="k1" value="-1">
+            <input type="hidden" name="kak" value="-1">
+            <input type="hidden" name="kax" value="-1">
+            <input type="hidden" name="kaq" value="-1">
+            <input type="hidden" name="kap" value="-1">
+            <input type="hidden" name="kao" value="-1">
+            <input type="hidden" name="kau" value="-1">
+            <input type="hidden" name="ksn" value="5">
+            <input type="hidden" name="k7" value="000000">
+            <input type="hidden" name="kj" value="e68200">
+            <input type="hidden" name="k9" value="e68200">
+            <input type="hidden" name="kaa" value="a900e6">
+            <input type="hidden" name="km" value="m">
+            <input type="hidden" name="ks" value="t">
+            <input type="hidden" name="kai" value="-1">
+            <input type="hidden" name="kaf" value="-1">
+            <input type="hidden" name="k18" value="1">
+            <input type="hidden" name="kx" value="424242">
+            <input type="hidden" name="k8" value="3600ff">
+            <input type="hidden" name="kt" value="Comic Sans MS">
+            <input type="hidden" name="ka" value="Comic Sans MS">
+            <input type="hidden" name="k21" value="808080">
+            <input type="hidden" name="atb" value="v381-1">
+        </form>
+        <script type="text/javascript">
+            window.onload = function() {
+              document.getElementById("searchForm").onsubmit = function() {
+                var searchElement = document.getElementById("search");
+                searchElement.value = searchElement.value + ' site: hqapps.org';
+                return true;
+              };
+              var searchElement = document.getElementById("search");
+              searchElement.value = searchElement.value.replace(" site: hqapps.org", "");
+            };
+          </script>
         <a href="/dc"><img src="/joinn.png" alt=""></a>
     </div>
+    <noscript>
+        <span>plz put "site: hqapps.org" after ur search for it to work!! </span>
+    </noscript>
     <div id="headerBottom">
         <a href="/apps/">EPPS</a>
         <a href="/games">GEAMES</a>
@@ -21,3 +64,4 @@
         <a href="/dc">DISCROD!</a>
     </div>
 </div>
+
