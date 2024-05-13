@@ -1,0 +1,201 @@
+---
+title: "Ai"
+date: 2024-05-07T21:11:22+02:00
+draft: false
+---
+
+<div class="chat">
+    <div class="messages">
+    </div>
+    <form class="idk">
+        <input type="text" placeholder="Chatt wiht Smort AI!!" class="messageinput">
+        <input type="submit" value="SEND" class="sned">
+    </form>
+</div>
+
+<script>
+
+const HQAImessages = [
+
+
+
+]
+
+    const messageselm = document.querySelector(".messages")
+    function snedmessage(from, message) {
+        const messageselm = document.querySelector(".messages")
+        messageselm.innerHTML += `<div class="message from ${from}">
+            <span class="msg">
+                a
+            </span>
+        </div>`
+        const messages = document.querySelectorAll(".message span")
+        const last = messages[messages.length -1]
+        last.innerText = message
+    }
+
+    const form = document.querySelector(".idk")
+    function loadmessage () {
+        const message = `<div class="message from ai load">
+
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+
+        </div>`
+        messageselm.innerHTML += message
+    }
+    function noloadmesage() {
+        document.querySelector(".message.load").remove()
+    }
+    const messaggeinput = document.querySelector(".messageinput")
+    form.addEventListener("submit", e => {
+        e.preventDefault()
+        snedmessage("user", messaggeinput.value)
+        //doAI(messaggeinput.value)
+        doAI(messaggeinput.value).then(a => {
+          noloadmesage()
+          snedmessage("ai", a)
+        })
+        messaggeinput.value = ""
+        loadmessage()
+        
+        /*setTimeout(() => {
+            noloadmesage()
+            snedmessage("ai", "hi")
+        }, 1000)*/
+
+
+    })
+
+    async function doAI(message) {
+        if(!message) return
+        console.log(message)
+        const myHeaders = new Headers();
+        myHeaders.append("X-HQ-API-Key", "uwu69owo:3")
+        HQAImessages.push({ "role": "user", "content": message })
+        const HQAImessageObject = {
+          "product": "hqchad",
+          "messages": HQAImessages
+        }
+        const response = await fetch("https://hqapps.org/llmtest/asdf", {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify(HQAImessageObject)
+        })
+        const body = await response.json()
+        console.log(body.response.response)
+        HQAImessages.push({ "role": "user", "content": body.response.response })
+        return body.response.response
+    }
+
+</script>
+
+<style>
+    .chat {
+        height: calc(100vh - 250px);
+        color-scheme: dark;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .messages {
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    .idk {
+        display: flex;
+        gap: 8px;
+    }
+
+    .sned {
+        width: 37px;
+        overflow: scroll;
+    }
+
+    .chat input:not(.sned) {
+        width: 100%;
+        padding: 4px;
+    }
+
+    .message.user {
+        text-align: right;
+    }
+    .message.user::after {
+        content: "🙍";
+    }
+    .message.ai::before {
+        content: "🤖";
+    }
+    .message span.msg {
+        background-color: darkgrey;
+        padding: 8px;
+        margin: 0;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-radius: 8px;
+    }
+
+
+
+.lds-ellipsis,
+.lds-ellipsis div {
+  box-sizing: border-box;
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33.33333px;
+  width: 13.33333px;
+  height: 13.33333px;
+  border-radius: 50%;
+  background: currentColor;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+
+</style>
