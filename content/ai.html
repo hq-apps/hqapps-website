@@ -189,10 +189,24 @@ draft: false
   function insertPrompt(a) {
     messaggeinput.value = a
   }
+
+  function checkiOS(overrideios) {
+    const ua = navigator.userAgent
+    if(ua.includes("Mac OS X") || overrideios) {
+      document.body.style.cssText = "--user-bubble-color: cornflowerblue";
+    }
+  }
+
   addRandomSuggestions()
+  checkiOS()
 </script>
 
 <style>
+
+  body {
+    --user-bubble-color: chartreuse;
+  }
+
   .chat {
     max-height: calc(100vh - 50px);
     min-height: calc(100vh - 250px);
@@ -264,7 +278,7 @@ draft: false
   }
 
   .message.user .message-bubble {
-    background-color: chartreuse;
+    background-color: var(--user-bubble-color);
     color: black;
   }
 
