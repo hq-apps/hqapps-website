@@ -46,7 +46,6 @@ draft: false
   let streaming = true;
   let baseURL = "https://hqapps.org/llmtest/asdf"
   let session = ""
-  let captchaComplete = false
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
@@ -141,7 +140,6 @@ draft: false
     const captchaToken = await doCaptcha()
     nocaptchamsg()
     loadmessage()
-    captchaComplete = true
     const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
     const token = await response.text()
     console.log(token)
@@ -149,7 +147,7 @@ draft: false
   }
 
   async function doAI(message) {
-    if (!captchaComplete) {
+    if (!session || session.split("_")[0] <= Date.now()) {
       await getSession()
       console.log("captcha done")
     }
