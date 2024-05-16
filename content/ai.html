@@ -155,6 +155,8 @@ draft: false
     if (!message) return
     console.log(message)
 
+    HQAImessages.push({ "role": "user", "content": message })
+
     if (streaming) {
       streamingrn = true
       const streamurl = `${baseURL}?product=hqchad&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}&session=${encodeURIComponent(session)}`
@@ -164,7 +166,7 @@ draft: false
     } else {
       const myHeaders = new Headers();
       myHeaders.append("X-HQ-API-Key", "uwu69owo:3")
-      HQAImessages.push({ "role": "user", "content": message })
+      
       const HQAImessageObject = {
         "product": "hqchad",
         "messages": HQAImessages,
