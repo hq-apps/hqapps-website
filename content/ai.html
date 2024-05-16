@@ -16,6 +16,7 @@ draft: false
       <div id="suggestions"></div>
     </div>
   </div>
+
   <form class="idk">
     <div>
       <input type="text" placeholder="Chatt wiht Smort AI!!" class="messageinput">
@@ -44,6 +45,8 @@ draft: false
   let streamingrn = false;
   let streaming = true;
   let baseURL = "https://hqapps.org/llmtest/asdf"
+  let session = ""
+  let captchaComplete = false
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
@@ -59,7 +62,20 @@ draft: false
     const messages = document.querySelectorAll(".message span")
     const last = messages[messages.length - 1]
     last.innerText = message
-    if(streamingrn) streamMsg = last;
+    if (streamingrn) streamMsg = last;
+  }
+
+  function snedmessagehtml(from, message) {
+    const chatinfo = document.querySelector(".chat-info")
+    chatinfo.style.display = "none"
+    const messageselm = document.querySelector(".messages")
+    messageselm.innerHTML += `<div class="message from ${from}">
+          <div class="message-bubble">
+            <span class="msg">
+                ${message}
+            </span>
+            </div>
+        </div>`;
   }
 
   const form = document.querySelector(".idk")
@@ -78,7 +94,10 @@ draft: false
   function noloadmesage() {
     formInputs[0].disabled = false
     formInputs[1].disabled = false
-    document.querySelector(".message.load").remove()
+    document.querySelector(".message.load")?.remove()
+  }
+  function nocaptchamsg() {
+    document.querySelector(".message.captcha")?.remove()
   }
   const messaggeinput = document.querySelector(".messageinput")
   form.addEventListener("submit", e => {
@@ -87,14 +106,15 @@ draft: false
       return
     }
     snedmessage("user", messaggeinput.value)
+    loadmessage()
     //doAI(messaggeinput.value)
     doAI(messaggeinput.value).then(a => {
-      if(!a) return
+      if (!a) return
       noloadmesage()
       snedmessage("ai", a)
     })
     messaggeinput.value = ""
-    loadmessage()
+
 
     /*setTimeout(() => {
         noloadmesage()
@@ -104,13 +124,41 @@ draft: false
 
   })
 
+  function doCaptcha() {
+    return new Promise((resolve) => {
+      noloadmesage()
+      snedmessagehtml("ai captcha", `<div id="turnstile-container"></div>`)
+      turnstile.render('#turnstile-container', {
+        sitekey: '0x4AAAAAAAaUKiQooN03nv_e',
+        callback: function (token) {
+          resolve(token)
+        },
+      });
+    })
+  }
+
+  async function getSession() {
+    const captchaToken = await doCaptcha()
+    nocaptchamsg()
+    loadmessage()
+    captchaComplete = true
+    const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
+    const token = await response.text()
+    console.log(token)
+    session = token
+  }
+
   async function doAI(message) {
+    if (!captchaComplete) {
+      await getSession()
+      console.log("captcha done")
+    }
     if (!message) return
     console.log(message)
-    
+
     if (streaming) {
       streamingrn = true
-      const streamurl = `${baseURL}?product=hqchad&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}`
+      const streamurl = `${baseURL}?product=hqchad&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}&session=${encodeURIComponent(session)}`
       streamSource = new EventSource(streamurl)
       streamSource.addEventListener("message", streamMessage)
       return false
@@ -120,7 +168,8 @@ draft: false
       HQAImessages.push({ "role": "user", "content": message })
       const HQAImessageObject = {
         "product": "hqchad",
-        "messages": HQAImessages
+        "messages": HQAImessages,
+        "session": session
       }
       const response = await fetch(baseURL, {
         method: "POST",
@@ -142,7 +191,7 @@ draft: false
       return;
     }
     const data = JSON.parse(event.data);
-    if(streamMsg) {
+    if (streamMsg) {
       streamMsg.innerText += data.response || ""
     } else {
       noloadmesage()
@@ -192,17 +241,20 @@ draft: false
 
   function checkiOS(overrideios) {
     const ua = navigator.userAgent
-    if(ua.includes("Mac OS X") || overrideios) {
+    if (ua.includes("Mac OS X") || overrideios) {
       document.body.style.cssText = "--user-bubble-color: cornflowerblue";
     }
   }
 
   addRandomSuggestions()
   checkiOS()
+
+  window.onloadTurnstilerReadyCallback = () => {
+    console.log("turnstile ready")
+  }
 </script>
 
 <style>
-
   body {
     --user-bubble-color: chartreuse;
   }
@@ -415,3 +467,5 @@ draft: false
     }
   }
 </style>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstilerReadyCallback"></script>
