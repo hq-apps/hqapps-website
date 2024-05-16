@@ -4,6 +4,18 @@ date: 2024-05-07T21:11:22+02:00
 draft: false
 ---
 
+<div class="chats-panel">
+  <div class="card" onclick="newChat" id="newchat">
+    <span>New Chat</span>
+  </div>
+  <div class="item">
+    <span>hi</span>
+  </div>
+  <div class="item">
+    <span>hi</span>
+  </div>
+</div>
+
 <div class="chat">
   <div class="messages">
     <div class="chat-info">
@@ -32,7 +44,7 @@ draft: false
 
 <script>
 
-  const HQAImessages = [
+  let HQAImessages = [
 
 
 
@@ -46,6 +58,7 @@ draft: false
   let streaming = true;
   let baseURL = "https://hqapps.org/llmtest/asdf"
   let session = ""
+  let isNewChat = true
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
@@ -179,7 +192,7 @@ draft: false
       })
       const body = await response.json()
       console.log(body.response.response)
-      HQAImessages.push({ "role": "user", "content": body.response.response })
+      HQAImessages.push({ "role": "assistant", "content": body.response.response })
       return body.response.response
     }
   }
@@ -194,9 +207,11 @@ draft: false
     const data = JSON.parse(event.data);
     if (streamMsg) {
       streamMsg.innerText += data.response || ""
+      HQAImessages[HQAImessages.length-1].content += data.response
     } else {
       noloadmesage()
       snedmessage("ai", data.response || "")
+      HQAImessages.push({ "role": "assistant", "content": data.response })
     }
     console.log(data.response)
   }
@@ -255,6 +270,15 @@ draft: false
     session = localStorage.getItem("session") || ""
   }
 
+  function newChat() {
+    if(streamingrn) return
+    HQAImessages = []
+    isNewChat = true
+    document.querySelectorAll(".message").forEach(e => e.remove())
+    const chatinfo = document.querySelector(".chat-info")
+    chatinfo.style.display = "flex"
+  }
+
   addRandomSuggestions()
   checkiOS()
 
@@ -263,6 +287,7 @@ draft: false
   }
 
   loadSession()
+  document.getElementById("newchat").addEventListener("click", newChat)
 </script>
 
 <style>
@@ -375,7 +400,7 @@ draft: false
   }
 
   main {
-    overflow-x: hidden;
+    overflow-x: visible;
   }
 
   .chat-info {
@@ -405,6 +430,31 @@ draft: false
   }
 
 
+  .chats-panel {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    transform: translateX(-100%);
+    background-color: #00000095;
+    border: #80808032 1px solid;
+    backdrop-filter: blur(8px) saturate(10);
+    -webkit-backdrop-filter: blur(8px) saturate(10);
+    width: 30%;
+    max-width: 200px;
+    padding: 8px;
+  }
+
+  .chats-panel .card {
+    border: 1px grey solid;
+    padding: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .chats-panel .item {
+    padding: 4px;
+    cursor: pointer;
+  }
 
   .lds-ellipsis,
   .lds-ellipsis div {
