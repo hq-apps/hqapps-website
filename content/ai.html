@@ -144,6 +144,7 @@ draft: false
     const token = await response.text()
     console.log(token)
     session = token
+    saveSession()
   }
 
   async function doAI(message) {
@@ -244,12 +245,22 @@ draft: false
     }
   }
 
+  function saveSession() {
+    localStorage.setItem("session", session)
+  }
+
+  function loadSession() {
+    session = localStorage.getItem("session") || ""
+  }
+
   addRandomSuggestions()
   checkiOS()
 
   window.onloadTurnstilerReadyCallback = () => {
     console.log("turnstile ready")
   }
+
+  loadSession()
 </script>
 
 <style>
