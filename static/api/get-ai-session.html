@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="turnstileDone"></div>
+
+    <script>
+        let baseURL = "https://hqapps.org/api/llm"
+        async function turnstileDone(captchaToken) {
+            const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
+            const token = await response.text()
+            console.log(token)
+        }
+    </script>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+</body>
+
+</html>
