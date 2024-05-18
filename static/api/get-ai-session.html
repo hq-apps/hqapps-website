@@ -24,9 +24,7 @@
             const token = await response.text()
             console.log(token)
 
-            if(AppInventor in window) {
-                window.AppInventor.setWebViewString(token)
-            }
+            window.AppInventor.setWebViewString(token)
         }
     </script>
 
