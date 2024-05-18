@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="turnstileDone"></div>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAaUKiQooN03nv_e" data-callback="turnstileDone"></div>
 
     <script>
         let baseURL = "https://hqapps.org/api/llm"
@@ -23,6 +23,10 @@
             const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
             const token = await response.text()
             console.log(token)
+
+            if(AppInventor in window) {
+                window.AppInventor.setWebViewString(token)
+            }
         }
     </script>
 
