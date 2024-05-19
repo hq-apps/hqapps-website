@@ -59,11 +59,13 @@ draft: false
   let baseURL = "https://hqapps.org/api/llm"
   let session = ""
   let isNewChat = true
+  let currentChatId = crypto.randomUUID()
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
     chatinfo.style.display = "none"
     const messageselm = document.querySelector(".messages")
+    if(from === "assistant") from = "ai"
     messageselm.innerHTML += `<div class="message from ${from}">
           <div class="message-bubble">
             <span class="msg">
@@ -124,6 +126,8 @@ draft: false
       if (!a) return
       noloadmesage()
       snedmessage("ai", a)
+      saveChat()
+      loadChatSidebar()
     })
     messaggeinput.value = ""
 
@@ -202,6 +206,8 @@ draft: false
       streamSource.close();
       streamingrn = false
       streamMsg = null
+      saveChat()
+      loadChatSidebar()
       return;
     }
     const data = JSON.parse(event.data);
@@ -277,6 +283,47 @@ draft: false
     document.querySelectorAll(".message").forEach(e => e.remove())
     const chatinfo = document.querySelector(".chat-info")
     chatinfo.style.display = "flex"
+    currentChatId = crypto.randomUUID()
+  }
+
+  function loadChat(chat) {
+    newChat()
+    HQAImessages = chat
+    chat.forEach(e => snedmessage(e.role, e.content))
+  }
+
+  function chatFromLocalStorage(id) {
+    loadChat(JSON.parse(localStorage.getItem("chat_" + id)))
+    currentChatId = id
+  }
+
+  function saveChat() {
+    localStorage.setItem("chat_" + currentChatId, JSON.stringify(HQAImessages))
+  }
+
+  function loadChatSidebar() {
+    let all = []
+    for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+      all.push(localStorage.key( i ))
+    }
+    all.filter(e => e.startsWith("chat_"))
+    const panel = document.querySelector(".chats-panel")
+    panel.innerHTML = `
+    <div class="card" onclick="newChat()" id="newchat">
+    <span>New Chat</span>
+  </div>
+  ${(() => {
+    result = ""
+    all.forEach(e => {
+      result += `
+      <div class="item" onclick="chatFromLocalStorage('${e.split("_")[1]}')">
+        <span>${localStorage.getItem(`name_${e}`) || "new chat"}</span>
+      </div>
+      `
+    })
+    return result
+  })()}
+    `
   }
 
   addRandomSuggestions()
@@ -288,6 +335,8 @@ draft: false
 
   loadSession()
   document.getElementById("newchat").addEventListener("click", newChat)
+
+  loadChatSidebar()
 </script>
 
 <style>
