@@ -268,6 +268,8 @@ draft: false
       "what's the ai's favorite hobby?"
     ]
 
+    suggestionselm.innerHTML = ""
+
     for (let i = 0; i < 4; i++) {
       const suggestion = document.createElement("span")
       const thisText = suggestions[Math.floor(Math.random() * suggestions.length)]
@@ -306,6 +308,7 @@ draft: false
     document.querySelectorAll(".message").forEach(e => e.remove())
     const chatinfo = document.querySelector(".chat-info")
     chatinfo.style.display = "flex"
+    addRandomSuggestions()
     currentChatId = crypto.randomUUID()
   }
 
