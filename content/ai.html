@@ -60,6 +60,8 @@ draft: false
   let session = ""
   let isNewChat = true
   let currentChatId = crypto.randomUUID()
+  let fakeAI = false
+  let currentDelete = false
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
@@ -128,6 +130,7 @@ draft: false
       snedmessage("ai", a)
       saveChat()
       loadChatSidebar()
+      document.querySelector(`.chats-panel .chat-${currentChatId}`).classList.add("current")
     })
     messaggeinput.value = ""
 
@@ -164,7 +167,22 @@ draft: false
     saveSession()
   }
 
-  async function doAI(message) {
+  async function doAI(message, option) {
+    if( !option) option = {}
+    let isMessage = true
+    let astreaming = streaming
+    if(option.askfortitle) {
+      isMessage = false
+      astreaming = false
+      option.product = "hqchadtitle"
+    }
+    if(fakeAI) {
+      if (isMessage) HQAImessages.push({ "role": "user", "content": message })
+      if (isMessage) HQAImessages.push({ "role": "assistant", "content": "meow" })
+      if( option.product == "hqchadtitle") return "uwu"
+      return "meow"
+    }
+
     if (!session || session.split("_")[0] <= Date.now()) {
       await getSession()
       console.log("captcha done")
@@ -172,9 +190,9 @@ draft: false
     if (!message) return
     console.log(message)
 
-    HQAImessages.push({ "role": "user", "content": message })
+    if (isMessage) HQAImessages.push({ "role": "user", "content": message })
 
-    if (streaming) {
+    if (astreaming) {
       streamingrn = true
       const streamurl = `${baseURL}?product=hqchad&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}&session=${encodeURIComponent(session)}`
       streamSource = new EventSource(streamurl)
@@ -185,7 +203,7 @@ draft: false
       myHeaders.append("X-HQ-API-Key", "uwu69owo:3")
       
       const HQAImessageObject = {
-        "product": "hqchad",
+        "product": option.product || "hqchad",
         "messages": HQAImessages,
         "session": session
       }
@@ -197,7 +215,7 @@ draft: false
       const body = await response.json()
       console.log(body.response.response)
       HQAImessages.push({ "role": "assistant", "content": body.response.response })
-      return body.response.response
+      return body.response.response || "error"
     }
   }
 
@@ -276,8 +294,10 @@ draft: false
     session = localStorage.getItem("session") || ""
   }
 
-  function newChat() {
+  function newChat(a) {
     if(streamingrn) return
+    if(!a) document.querySelector(".chats-panel .current")?.classList.remove("current") || null
+    if(!a) document.querySelector(".chats-panel #newchat").classList.add("current")
     HQAImessages = []
     isNewChat = true
     document.querySelectorAll(".message").forEach(e => e.remove())
@@ -287,18 +307,28 @@ draft: false
   }
 
   function loadChat(chat) {
-    newChat()
+    newChat(true)
     HQAImessages = chat
     chat.forEach(e => snedmessage(e.role, e.content))
   }
 
   function chatFromLocalStorage(id) {
+    document.querySelector(".chats-panel .current")?.classList.remove("current") || null
+    document.querySelector(`.chats-panel .chat-${id}`).classList.add("current")
     loadChat(JSON.parse(localStorage.getItem("chat_" + id)))
     currentChatId = id
   }
 
-  function saveChat() {
+  async function saveChat() {
     localStorage.setItem("chat_" + currentChatId, JSON.stringify(HQAImessages))
+    let name = localStorage.getItem("name_chat_" + currentChatId)
+    if(!name) {
+      name = await doAI(JSON.stringify(HQAImessages), {askfortitle: true})
+    }
+    localStorage.setItem("name_chat_" + currentChatId, name)
+    loadChatSidebar()
+    document.querySelector(".chats-panel .current")?.classList.remove("current") || null
+    document.querySelector(`.chats-panel .chat-${currentChatId}`).classList.add("current")
   }
 
   function loadChatSidebar() {
@@ -306,7 +336,8 @@ draft: false
     for ( var i = 0, len = localStorage.length; i < len; ++i ) {
       all.push(localStorage.key( i ))
     }
-    all.filter(e => e.startsWith("chat_"))
+    all = all.filter(e => e.startsWith("chat_"))
+    console.log(all)
     const panel = document.querySelector(".chats-panel")
     panel.innerHTML = `
     <div class="card" onclick="newChat()" id="newchat">
@@ -316,14 +347,28 @@ draft: false
     result = ""
     all.forEach(e => {
       result += `
-      <div class="item" onclick="chatFromLocalStorage('${e.split("_")[1]}')">
+      <div class="item chat-${e.split("_")[1]}" onclick="chatFromLocalStorage('${e.split("_")[1]}')">
         <span>${localStorage.getItem(`name_${e}`) || "new chat"}</span>
+        <button onclick="startDelete('${e.split("_")[1]}')">deletin</button>
       </div>
       `
     })
     return result
   })()}
     `
+  }
+
+  function startDelete(id) {
+    currentDelete = id
+    confirm("are YOU relly DELET?????") ? doDelete() : null
+  }
+
+  function doDelete() {
+    localStorage.removeItem("chat_" + currentDelete)
+    localStorage.removeItem("name_chat_" + currentDelete)
+    if(currentDelete == currentChatId) newChat()
+    loadChatSidebar()
+    currentDelete = false
   }
 
   addRandomSuggestions()
@@ -337,6 +382,11 @@ draft: false
   document.getElementById("newchat").addEventListener("click", newChat)
 
   loadChatSidebar()
+  newChat()
+
+  if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1") {
+    fakeAI = true
+  }
 </script>
 
 <style>
@@ -491,6 +541,9 @@ draft: false
     width: 30%;
     max-width: 200px;
     padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .chats-panel .card {
@@ -503,6 +556,15 @@ draft: false
   .chats-panel .item {
     padding: 4px;
     cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .chats-panel .item.current {
+    background-color: grey;
+  }
+
+  .chats-panel .card.current {
+    background-color: grey;
   }
 
   .lds-ellipsis,
