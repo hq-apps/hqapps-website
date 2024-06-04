@@ -204,7 +204,7 @@ draft: false
       
       const HQAImessageObject = {
         "product": option.product || "hqchad",
-        "messages": HQAImessages,
+        "messages": isMessage ? HQAImessages : message,
         "session": session
       }
       const response = await fetch(baseURL, {
@@ -321,11 +321,12 @@ draft: false
 
   async function saveChat() {
     localStorage.setItem("chat_" + currentChatId, JSON.stringify(HQAImessages))
+    loadChatSidebar()
     let name = localStorage.getItem("name_chat_" + currentChatId)
     if(!name) {
       name = await doAI(JSON.stringify(HQAImessages), {askfortitle: true})
+      localStorage.setItem("name_chat_" + currentChatId, name)
     }
-    localStorage.setItem("name_chat_" + currentChatId, name)
     loadChatSidebar()
     document.querySelector(".chats-panel .current")?.classList.remove("current") || null
     document.querySelector(`.chats-panel .chat-${currentChatId}`).classList.add("current")
