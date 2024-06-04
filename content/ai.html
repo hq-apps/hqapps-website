@@ -327,6 +327,7 @@ draft: false
 
   async function saveChat() {
     localStorage.setItem("chat_" + currentChatId, JSON.stringify(HQAImessages))
+    localStorage.setItem("date_chat_" + currentChatId, Date.now())
     loadChatSidebar()
     let name = localStorage.getItem("name_chat_" + currentChatId)
     if(!name) {
@@ -344,6 +345,9 @@ draft: false
       all.push(localStorage.key( i ))
     }
     all = all.filter(e => e.startsWith("chat_"))
+    all = all.sort((a, b) =>
+      (localStorage.getItem("date_" + a) || 0) < (localStorage.getItem("date_" + b) || 0)
+    )
     console.log(all)
     const panel = document.querySelector(".chats-panel")
     panel.innerHTML = `
@@ -355,8 +359,11 @@ draft: false
     all.forEach(e => {
       result += `
       <div class="item chat-${e.split("_")[1]}" onclick="chatFromLocalStorage('${e.split("_")[1]}')">
-        <span>${localStorage.getItem(`name_${e}`) || "new chat"}</span>
-        <button onclick="startDelete('${e.split("_")[1]}')">deletin</button>
+        <div class="title-date">
+          <span>${localStorage.getItem(`name_${e}`) || "new chat"}</span>
+          <span class="date">${new Date(parseInt(localStorage.getItem(`date_${e}`)) || 0).toLocaleString()}</span>
+        </div>
+        <button class="delete-button" onclick="startDelete('${e.split("_")[1]}')">deletin</button>
       </div>
       `
     })
@@ -550,11 +557,12 @@ draft: false
     backdrop-filter: blur(8px) saturate(10);
     -webkit-backdrop-filter: blur(8px) saturate(10);
     width: 30%;
-    max-width: 200px;
+    max-width: 270px;
     padding: 8px;
     display: flex;
     flex-direction: column;
     gap: 2px;
+    transition: left 250ms, transform 250ms, top 250ms, width 250ms;
   }
 
   .chats-panel .card {
@@ -568,6 +576,9 @@ draft: false
     padding: 4px;
     cursor: pointer;
     border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 
   .chats-panel .item.current {
@@ -578,6 +589,20 @@ draft: false
     background-color: grey;
   }
 
+  .chats-panel .title-date {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chats-panel .title-date .date {
+    color: gray;
+    font-size: 0.7em;
+  }
+
+  .chats-panel .item.current .title-date .date {
+    color: lightgray;
+  }
+
   .mobile-top-bar {
     display: none;
   }
@@ -585,6 +610,11 @@ draft: false
   @media (max-width: 800px) {
     .mobile-top-bar {
       display: flex;
+    }
+
+    .chats-panel {
+      transform: translateX(-100%) rotate(90deg);
+      left: -50%;
     }
 
     .chats-panel.mobile-show {
@@ -668,6 +698,56 @@ draft: false
       transform: translate(24px, 0);
     }
   }
+
+  .delete-button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 6px 13px;
+    border: 1px solid #785510;
+    border-radius: 8px;
+    background: #debc71;
+    background: -webkit-gradient(linear, left top, left bottom, from(#debc71), to(#ffae0d));
+    background: -moz-linear-gradient(top, #debc71, #ffae0d);
+    background: linear-gradient(to bottom, #debc71, #ffae0d);
+    -webkit-box-shadow: #efa40e 0px 0px 16px 0px;
+    -moz-box-shadow: #efa40e 0px 0px 16px 0px;
+    box-shadow: #efa40e 0px 0px 16px 0px;
+    text-shadow: #644506 1px 1px 1px;
+    font: normal normal bold 10px "Saffari Sans";
+    color: #ffffff;
+    text-decoration: none;
+}
+.delete-button:hover,
+.delete-button:focus {
+    border: 1px solid #c0881a;
+    background: #ffe288;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffe288), to(#ffd110));
+    background: -moz-linear-gradient(top, #ffe288, #ffd110);
+    background: linear-gradient(to bottom, #ffe288, #ffd110);
+    color: #ffffff;
+    text-decoration: none;
+}
+.delete-button:active {
+    background: #857144;
+    background: -webkit-gradient(linear, left top, left bottom, from(#857144), to(#ffae0d));
+    background: -moz-linear-gradient(top, #857144, #ffae0d);
+    background: linear-gradient(to bottom, #857144, #ffae0d);
+}
+.delete-button:after{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 -4px -6px 4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,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") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+
 </style>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstilerReadyCallback"></script>
