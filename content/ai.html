@@ -17,6 +17,9 @@ draft: false
 </div>
 
 <div class="chat">
+  <div class="mobile-top-bar">
+    <button onclick="toggleMobileChatSidebar()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+  </div>
   <div class="messages">
     <div class="chat-info">
       <span>welcom to</span>
@@ -372,6 +375,10 @@ draft: false
     currentDelete = false
   }
 
+  function toggleMobileChatSidebar() {
+    document.querySelector(".chats-panel").classList.toggle("mobile-show")
+  }
+
   addRandomSuggestions()
   checkiOS()
 
@@ -566,6 +573,25 @@ draft: false
 
   .chats-panel .card.current {
     background-color: grey;
+  }
+
+  .mobile-top-bar {
+    display: none;
+  }
+
+  @media (max-width: 800px) {
+    .mobile-top-bar {
+      display: flex;
+    }
+
+    .chats-panel.mobile-show {
+      left: 0;
+      top: 96px;
+      transform: translateX(0);
+      z-index: 1000;
+      max-width: 80%;
+      width: 320px;
+    }
   }
 
   .lds-ellipsis,
