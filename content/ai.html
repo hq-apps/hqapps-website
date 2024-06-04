@@ -204,7 +204,7 @@ draft: false
       
       const HQAImessageObject = {
         "product": option.product || "hqchad",
-        "messages": isMessage ? HQAImessages : message,
+        "messages": isMessage ? HQAImessages : { "role": "user", "content": message },
         "session": session
       }
       const response = await fetch(baseURL, {
