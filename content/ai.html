@@ -214,7 +214,7 @@ draft: false
       })
       const body = await response.json()
       console.log(body.response.response)
-      HQAImessages.push({ "role": "assistant", "content": body.response.response })
+      if (isMessage) HQAImessages.push({ "role": "assistant", "content": body.response.response })
       return body.response.response || "error"
     }
   }
