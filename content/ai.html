@@ -223,7 +223,7 @@ draft: false
 
     if (astreaming) {
       streamingrn = true
-      const streamurl = `${baseURL}?product=hqchad&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}&session=${encodeURIComponent(session)}`
+      const streamurl = `${baseURL}?product=${chatproduct}&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}&session=${encodeURIComponent(session)}`
       streamSource = new EventSource(streamurl)
       streamSource.addEventListener("message", streamMessage)
       return false
