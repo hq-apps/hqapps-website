@@ -4,7 +4,7 @@ date: 2024-05-07T21:11:22+02:00
 draft: false
 ---
 
-<div class="chats-panel">
+<div class="panel chats-panel">
   <div class="card" onclick="newChat" id="newchat">
     <span>New Chad</span>
   </div>
@@ -16,9 +16,31 @@ draft: false
   </div>
 </div>
 
+<div class="panel right-panel">
+  <div class="model-switcher">
+    <!-- Model list dropdown -->
+    <div class="model-list">
+      <button class="model-switch-button">Switch Model</button>
+      <ul class="model-list-dropdown">
+        <li data-model="hqchad">
+          <span>HQ Chad</span>
+          <i class="fas fa-info-circle"></i>
+        </li>
+        <li data-model="hqchadtitle">
+          <span>bad HQ Chad</span>
+          <i class="fas fa-info-circle"></i>
+        </li>
+      </ul>
+    </div>
+    <!-- Current model indicator -->
+    <span class="current-model">Current Model: <span class="current-model-name">HQ Chad</span></span>
+  </div>
+</div>
+
 <div class="chat">
   <div class="mobile-top-bar">
     <button onclick="toggleMobileChatSidebar()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+    <button onclick="toggleMobileRightSidebar()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
   </div>
   <div class="messages">
     <div class="chat-info">
@@ -65,6 +87,10 @@ draft: false
   let currentChatId = crypto.randomUUID()
   let fakeAI = false
   let currentDelete = false
+  let chatproduct = "hqchad"
+  let chatproducts = {
+    hqchad: "HQ Chad"
+  }
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
@@ -206,7 +232,7 @@ draft: false
       myHeaders.append("X-HQ-API-Key", "uwu69owo:3")
       
       const HQAImessageObject = {
-        "product": option.product || "hqchad",
+        "product": option.product || chatproduct,
         "messages": isMessage ? HQAImessages : { "role": "user", "content": message },
         "session": session
       }
@@ -388,6 +414,9 @@ draft: false
   function toggleMobileChatSidebar() {
     document.querySelector(".chats-panel").classList.toggle("mobile-show")
   }
+  function toggleMobileRightSidebar() {
+    document.querySelector(".right-panel").classList.toggle("mobile-show")
+  }
 
   addRandomSuggestions()
   checkiOS()
@@ -405,6 +434,42 @@ draft: false
   if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1") {
     fakeAI = true
   }
+
+  // Get the model list dropdown and button elements
+const modelListDropdown = document.querySelector('.model-list-dropdown');
+const modelSwitchButton = document.querySelector('.model-switch-button');
+
+// Get the current model indicator element
+const currentModelIndicator = document.querySelector('.current-model-name');
+
+// Add event listener to the model switch button
+modelSwitchButton.addEventListener('click', () => {
+  // Toggle the model list dropdown
+  modelListDropdown.classList.toggle('show');
+});
+
+// Add event listeners to the model list items
+document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
+  item.addEventListener('click', (event) => {
+    // Get the selected model
+    const targetLi = event.target.closest('li');
+    const selectedModel = targetLi.dataset.model;
+
+    
+    console.log(JSON.stringify(event.target.dataset))
+
+    // Update the current model indicator
+    currentModelIndicator.textContent = chatproducts[selectedModel];
+
+    // Hide the model list dropdown
+    modelListDropdown.classList.remove('show');
+
+    // Call the API to switch to the selected model (not implemented in this example)
+    // ...
+    chatproduct = selectedModel
+  });
+});
+
 </script>
 
 <style>
@@ -547,7 +612,7 @@ draft: false
   }
 
 
-  .chats-panel {
+  .panel {
     position: absolute;
     top: 0;
     left: -8px;
@@ -565,7 +630,7 @@ draft: false
     transition: left 250ms, transform 250ms, top 250ms, width 250ms;
   }
 
-  .chats-panel .card {
+  .panel .card {
     border: 1px grey solid;
     padding: 4px;
     border-radius: 8px;
@@ -607,19 +672,32 @@ draft: false
     display: none;
   }
 
+  .right-panel {
+    left: unset;
+    right: -8px;
+    transform: translate(100%);
+  }
+
   @media (max-width: 800px) {
     .mobile-top-bar {
       display: flex;
+      justify-content: space-between;
     }
 
-    .chats-panel {
+    .panel {
       transform: translateX(-100%) rotate(90deg);
       left: -90vh;
       height: 80vh;
       overflow: scroll;
     }
 
-    .chats-panel.mobile-show {
+    .right-panel {
+      transform: translateX(100%) rotate(90deg);
+      left: unset;
+      right: -90vh;
+    }
+
+    .panel.mobile-show {
       left: 0;
       top: 96px;
       transform: translateX(0);
@@ -627,7 +705,77 @@ draft: false
       max-width: 80%;
       width: 320px;
     }
+
+    .right-panel.mobile-show {
+      right: 0;
+      left: unset;
+    }
   }
+
+  /* Model switcher styles */
+.model-switcher {
+  margin-bottom: 20px;
+}
+
+.model-list {
+  position: relative;
+}
+
+.model-switch-button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.model-switch-button:hover {
+  background-color: #3e8e41;
+}
+
+.model-list-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #00000095;
+  border: #80808032 1px solid;
+  backdrop-filter: blur(8px) saturate(10);
+  -webkit-backdrop-filter: blur(8px) saturate(10);
+  padding: 10px;
+  display: none;
+}
+
+.model-list-dropdown li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.model-list-dropdown li:hover {
+  background-color: #ffffff50;
+}
+
+.model-list-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.model-list-dropdown li i {
+  margin-right: 10px;
+}
+
+.current-model {
+  font-size: 14px;
+  color: #666;
+}
+
+.current-model-name {
+  font-weight: bold;
+}
+
+.model-list-dropdown.show {
+  display: block; /* show when .show class is added */
+}
+
 
   .lds-ellipsis,
   .lds-ellipsis div {
