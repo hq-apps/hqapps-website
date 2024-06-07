@@ -233,7 +233,7 @@ draft: false
       
       const HQAImessageObject = {
         "product": option.product || chatproduct,
-        "messages": isMessage ? HQAImessages : { "role": "user", "content": message },
+        "messages": isMessage ? HQAImessages : [{ "role": "user", "content": message }],
         "session": session
       }
       const response = await fetch(baseURL, {
@@ -627,7 +627,7 @@ document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    transition: left 250ms, transform 250ms, top 250ms, width 250ms;
+    transition: left 250ms, right 250ms, transform 250ms, top 250ms, width 250ms;
   }
 
   .panel .card {
@@ -709,6 +709,10 @@ document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
     .right-panel.mobile-show {
       right: 0;
       left: unset;
+    }
+
+    main {
+      overflow-x: hidden;
     }
   }
 
