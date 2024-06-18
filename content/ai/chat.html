@@ -34,6 +34,10 @@ draft: false
           <span>HQ Chad PRO Ultimate 4090 <br><small style="color: darkgray">Built with Meta Llama 3</small></span>
           <i class="fas fa-info-circle"></i>
         </li>
+        <li data-model="meow">
+          <span>meow</span>
+          <i class="fas fa-info-circle"></i>
+        </li>
         <li data-model="hqchadmistral">
           <span>HQ Chad idk</span>
           <i class="fas fa-info-circle"></i>
@@ -109,7 +113,8 @@ draft: false
     hqchad: "HQ Chad",
     hqchadlite: "HQ Chad lite",
     hqchadpro: "HQ Chad Pro Ultra 4090 edition",
-    hqchadmistral: "HQ Chad idk"
+    hqchadmistral: "HQ Chad idk",
+    meow: "meow"
   }
 
   function snedmessage(from, message) {
@@ -225,7 +230,7 @@ draft: false
       astreaming = false
       option.product = "hqchadtitle"
     }
-    if(fakeAI) {
+    if(fakeAI || chatproduct == "meow") {
       if (isMessage) HQAImessages.push({ "role": "user", "content": message })
       if (isMessage) HQAImessages.push({ "role": "assistant", "content": "meow" })
       if( option.product == "hqchadtitle") return "uwu"
