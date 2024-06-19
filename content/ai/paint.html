@@ -4,6 +4,35 @@ date: 2024-05-07T21:11:22+02:00
 draft: false
 ---
 
+<div class="panel right-panel">
+    <div class="model-switcher">
+      <!-- Model list dropdown -->
+      <div class="model-list">
+        <button class="model-switch-button">Switch Model</button>
+        <ul class="model-list-dropdown">
+          <li data-model="hqaipaint">
+            <span>AI Paint</span>
+            <i class="fas fa-info-circle"></i>
+          </li>
+          <li data-model="hqaipaintquick">
+            <span>QUick</span>
+            <i class="fas fa-info-circle"></i>
+          </li>
+          <li data-model="hqaipaintquality">
+            <span>Quality</span>
+            <i class="fas fa-info-circle"></i>
+          </li>
+          <li data-model="hqaipaintrealism">
+            <span>Realism Optimize</span>
+            <i class="fas fa-info-circle"></i>
+          </li>
+        </ul>
+      </div>
+      <!-- Current model indicator -->
+      <span class="current-model">Current Model: <span class="current-model-name">Quick</span></span>
+    </div>
+  </div>
+
 <div class="hqaitoolbar">
     <span><b>HQ AI</b></span>
     <span>*</span>
@@ -32,6 +61,14 @@ draft: false
 <script>
 
     let session = "";
+    let product = "hqaipaintquick"
+
+    const products = {
+        hqaipaint: "AI Paint",
+        hqaipaintquick: "Quick",
+        hqaipaintquality: "Quality",
+        hqaipaintrealism: "Realism Optimize",
+    }
 
     const baseURL = "https://hqapps.org/api/llm"
 
@@ -55,7 +92,7 @@ draft: false
         }*/
 
         const requestBody = {
-            "product": "hqaipaint",
+            "product": product,
             "prompt": prompt,
             "session": session
         }
@@ -130,7 +167,42 @@ draft: false
 
     loadSession()
 
+    // Get the model list dropdown and button elements
+const modelListDropdown = document.querySelector('.model-list-dropdown');
+const modelSwitchButton = document.querySelector('.model-switch-button');
+
+// Get the current model indicator element
+const currentModelIndicator = document.querySelector('.current-model-name');
+
+// Add event listener to the model switch button
+modelSwitchButton.addEventListener('click', () => {
+  // Toggle the model list dropdown
+  modelListDropdown.classList.toggle('show');
+});
+
     form.addEventListener("submit", generateImg)
+
+    document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
+  item.addEventListener('click', (event) => {
+    // Get the selected model
+    const targetLi = event.target.closest('li');
+    const selectedModel = targetLi.dataset.model;
+
+    
+    console.log(JSON.stringify(event.target.dataset))
+
+    // Update the current model indicator
+    currentModelIndicator.textContent = products[selectedModel];
+
+    // Hide the model list dropdown
+    modelListDropdown.classList.remove('show');
+
+    // Call the API to switch to the selected model (not implemented in this example)
+    // ...
+    product = selectedModel
+  });
+});
+
 </script>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstilerReadyCallback"></script>
