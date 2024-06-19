@@ -18,6 +18,7 @@ draft: false
         <div>
             <input type="text" placeholder="Imagin......." class="promptinput">
             <input type="submit" value="Generate" class="sned">
+            <textarea class="extra-options" style="display: none;"></textarea>
         </div>
     </form>
 
@@ -36,6 +37,7 @@ draft: false
 
     const form = document.querySelector(".idk")
     const imggallery = document.querySelector(".image-gallery")
+    const extraOptions = document.querySelector(".extra-options")
 
     function saveSession() {
         localStorage.setItem("session", session)
@@ -47,16 +49,18 @@ draft: false
 
     async function doImgAI(prompt) {
 
-        if (!session || session.split("_")[0] <= Date.now()) {
+        /*if (!session || session.split("_")[0] <= Date.now()) {
             await getSession()
             console.log("captcha done")
-        }
+        }*/
 
         const requestBody = {
             "product": "hqaipaint",
             "prompt": prompt,
             "session": session
         }
+
+        if(extraOptions.value != "") requestBody["extra"] = JSON.parse(extraOptions.value)
 
         const response = await fetch(baseURL, {
             "headers": {
@@ -118,6 +122,10 @@ draft: false
         console.log(token)
         session = token
         saveSession()
+    }
+
+    function showExtra() {
+        extraOptions.style.display = "block"
     }
 
     loadSession()
