@@ -4,20 +4,26 @@ date: 2024-05-07T21:11:22+02:00
 draft: false
 ---
 
+<style>
+    #clear {
+        display: none;
+    }
+</style>
 
 <div class="hqaitoolbar">
     <span><b>HQ AI</b></span>
     <span>*</span>
     <li class="aiappstabs">
-      <ul><a href="../chat">Chad</a></ul>
-      <ul class="active"><a href="../paint">Paint</a></ul>
+        <ul><a href="../chat">Chad</a></ul>
+        <ul class="active"><a href="../paint">Paint</a></ul>
     </li>
-  </div>
+</div>
 
 <div class="chat paint">
     <form class="idk">
         <div>
-            <input type="text" placeholder="Imagin......." class="messageinput">
+            <button id="clear">my eyes hurt</button>
+            <input type="text" placeholder="Imagin......." class="promptinput">
             <input type="submit" value="Generate" class="sned">
         </div>
     </form>
@@ -30,5 +36,79 @@ draft: false
 </div>
 
 <script>
-    
+
+    let session = "";
+
+    const baseURL = "https://hqapps.org/api/llm"
+
+    const form = document.querySelector(".idk")
+
+    function saveSession() {
+    localStorage.setItem("session", session)
+  }
+
+  function loadSession() {
+    session = localStorage.getItem("session") || ""
+  }
+
+    async function doImgAI(prompt) {
+
+        const requestBody = {
+            "product": "hqaipaint", 
+            "prompt": prompt, 
+            "session": session
+        }
+
+        const response = await fetch(baseURL, {
+            "headers": {
+                "x-hq-api-key": "uwu69owo:3",
+            },
+            "body": JSON.stringify(requestBody),
+            "method": "POST",
+        });
+
+        const blob = await response.blob()
+
+        return blob
+    }
+
+    async function generateImg(e) {
+        e.preventDefault()
+        const prompt = form.querySelector(".promptinput").value
+        const imgblob = await doImgAI(prompt)
+
+        document.querySelector(".image-gallery").innerHTML = `
+            <img src="${URL.createObjectURL(imgblob)}">
+        `
+    }
+
+    function doCaptcha() {
+    return new Promise((resolve) => {
+      //noloadmesage()
+      //snedmessagehtml("ai captcha", `<div id="turnstile-container"></div>`)
+      turnstile.render('#turnstile-container', {
+        sitekey: '0x4AAAAAAAaUKiQooN03nv_e',
+        callback: function (token) {
+          resolve(token)
+        },
+      });
+    })
+  }
+
+  async function getSession() {
+    const captchaToken = await doCaptcha()
+    //nocaptchamsg()
+    //loadmessage()
+    const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
+    const token = await response.text()
+    console.log(token)
+    session = token
+    saveSession()
+  }
+
+    loadSession()
+
+    form.addEventListener("submit", generateImg)
 </script>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstilerReadyCallback"></script>
