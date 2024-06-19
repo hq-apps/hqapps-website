@@ -132,7 +132,7 @@ draft: false
         </div>`
     const messages = document.querySelectorAll(".message span")
     const last = messages[messages.length - 1]
-    last.innerHTML = marked.parse(message)
+    last.innerHTML = DOMPurify.sanitize(marked.parse(message.replace("<", "&lt;").replace(">", "&gt;")))
     if (streamingrn) streamMsg = last;
   }
 
@@ -288,7 +288,7 @@ draft: false
     const data = JSON.parse(event.data);
     streamText += data.response || ""
     if (streamMsg) {
-      streamMsg.innerHTML = marked.parse(streamText)
+      streamMsg.innerHTML = DOMPurify.sanitize(marked.parse(streamText.replace("<", "&lt;").replace(">", "&gt;")))
       HQAImessages[HQAImessages.length-1].content += data.response
     } else {
       noloadmesage()
@@ -507,3 +507,4 @@ document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstilerReadyCallback"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cure53/DOMPurify@3.1.5/dist/purify.min.js"></script>
