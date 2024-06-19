@@ -61,6 +61,10 @@ body {
     max-width: 80%;
   }
 
+  .message-bubble > span * {
+    margin: 0;
+  }
+
   .message {
     display: flex;
     gap: 8px;

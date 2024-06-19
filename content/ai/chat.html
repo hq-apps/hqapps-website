@@ -100,6 +100,7 @@ draft: false
 
   let streamSource;
   let streamMsg;
+  let streamText = "";
   let streamingrn = false;
   let streaming = true;
   let baseURL = "https://hqapps.org/api/llm"
@@ -131,7 +132,7 @@ draft: false
         </div>`
     const messages = document.querySelectorAll(".message span")
     const last = messages[messages.length - 1]
-    last.innerText = message
+    last.innerHTML = marked.parse(message)
     if (streamingrn) streamMsg = last;
   }
 
@@ -248,6 +249,7 @@ draft: false
 
     if (astreaming) {
       streamingrn = true
+      streamText = ""
       const streamurl = `${baseURL}?product=${chatproduct}&streaming=true&messages=${encodeURI(JSON.stringify(HQAImessages))}&key=${encodeURI("uwu69owo:3")}&session=${encodeURIComponent(session)}`
       streamSource = new EventSource(streamurl)
       streamSource.addEventListener("message", streamMessage)
@@ -278,13 +280,15 @@ draft: false
       streamSource.close();
       streamingrn = false
       streamMsg = null
+      streamText = ""
       saveChat()
       loadChatSidebar()
       return;
     }
     const data = JSON.parse(event.data);
+    streamText += data.response || ""
     if (streamMsg) {
-      streamMsg.innerText += data.response || ""
+      streamMsg.innerText = marked.parse(streamText)
       HQAImessages[HQAImessages.length-1].content += data.response
     } else {
       noloadmesage()
@@ -502,3 +506,4 @@ document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
 </style>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstilerReadyCallback"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
