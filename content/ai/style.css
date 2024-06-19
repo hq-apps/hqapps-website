@@ -459,6 +459,10 @@ body {
   position: static;
 }
 
+.chat.paint {
+  max-height: none;
+}
+
 .hqaitoolbar {
   display: flex;
   align-items: center;
