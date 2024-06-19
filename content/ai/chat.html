@@ -288,7 +288,7 @@ draft: false
     const data = JSON.parse(event.data);
     streamText += data.response || ""
     if (streamMsg) {
-      streamMsg.innerText = marked.parse(streamText)
+      streamMsg.innerHTML = marked.parse(streamText)
       HQAImessages[HQAImessages.length-1].content += data.response
     } else {
       noloadmesage()
