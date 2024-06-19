@@ -4,12 +4,6 @@ date: 2024-05-07T21:11:22+02:00
 draft: false
 ---
 
-<style>
-    #clear {
-        display: none;
-    }
-</style>
-
 <div class="hqaitoolbar">
     <span><b>HQ AI</b></span>
     <span>*</span>
@@ -22,7 +16,6 @@ draft: false
 <div class="chat paint">
     <form class="idk">
         <div>
-            <button id="clear">my eyes hurt</button>
             <input type="text" placeholder="Imagin......." class="promptinput">
             <input type="submit" value="Generate" class="sned">
         </div>
@@ -42,6 +35,7 @@ draft: false
     const baseURL = "https://hqapps.org/api/llm"
 
     const form = document.querySelector(".idk")
+    const imggallery = document.querySelector(".image-gallery")
 
     function saveSession() {
     localStorage.setItem("session", session)
@@ -73,13 +67,27 @@ draft: false
     }
 
     async function generateImg(e) {
+        
+        imggallery.innerHTML = `
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        `
         e.preventDefault()
         const prompt = form.querySelector(".promptinput").value
         const imgblob = await doImgAI(prompt)
 
-        document.querySelector(".image-gallery").innerHTML = `
+        imggallery.innerHTML = `
             <img src="${URL.createObjectURL(imgblob)}">
+            <div>
+                <button onclick="clearimg()">my eyes hurt</button>
+                <a href="${URL.createObjectURL(imgblob)}" download><button>save image</button></a>
+            </div>
         `
+    }
+
+    function clearimg() {
+        imggallery.innerHTML = `<div class="chat-info">
+            <h2>Beginn to make the image!!</h2>
+        </div>`
     }
 
     function doCaptcha() {

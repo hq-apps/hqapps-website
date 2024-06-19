@@ -464,3 +464,12 @@ body {
   align-items: center;
   gap: 16px;
 }
+
+.image-gallery {
+  display: grid;
+  place-items: center;
+}
+
+.image-gallery img {
+  width: 100%;
+}
