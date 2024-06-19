@@ -38,18 +38,23 @@ draft: false
     const imggallery = document.querySelector(".image-gallery")
 
     function saveSession() {
-    localStorage.setItem("session", session)
-  }
+        localStorage.setItem("session", session)
+    }
 
-  function loadSession() {
-    session = localStorage.getItem("session") || ""
-  }
+    function loadSession() {
+        session = localStorage.getItem("session") || ""
+    }
 
     async function doImgAI(prompt) {
 
+        if (!session || session.split("_")[0] <= Date.now()) {
+            await getSession()
+            console.log("captcha done")
+        }
+
         const requestBody = {
-            "product": "hqaipaint", 
-            "prompt": prompt, 
+            "product": "hqaipaint",
+            "prompt": prompt,
             "session": session
         }
 
@@ -67,7 +72,7 @@ draft: false
     }
 
     async function generateImg(e) {
-        
+
         imggallery.innerHTML = `
                 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
         `
@@ -91,28 +96,29 @@ draft: false
     }
 
     function doCaptcha() {
-    return new Promise((resolve) => {
-      //noloadmesage()
-      //snedmessagehtml("ai captcha", `<div id="turnstile-container"></div>`)
-      turnstile.render('#turnstile-container', {
-        sitekey: '0x4AAAAAAAaUKiQooN03nv_e',
-        callback: function (token) {
-          resolve(token)
-        },
-      });
-    })
-  }
+        return new Promise((resolve) => {
+            //noloadmesage()
+            imggallery.innerHTML = `<div id="turnstile-container"></div>`
+            turnstile.render('#turnstile-container', {
+                sitekey: '0x4AAAAAAAaUKiQooN03nv_e',
+                callback: function (token) {
+                    resolve(token)
+                },
+            });
+        })
+    }
 
-  async function getSession() {
-    const captchaToken = await doCaptcha()
-    //nocaptchamsg()
-    //loadmessage()
-    const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
-    const token = await response.text()
-    console.log(token)
-    session = token
-    saveSession()
-  }
+    async function getSession() {
+        const captchaToken = await doCaptcha()
+        imggallery.innerHTML = `
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        `
+        const response = await fetch(`${baseURL}/registersession?turnstile=${encodeURI(captchaToken)}`)
+        const token = await response.text()
+        console.log(token)
+        session = token
+        saveSession()
+    }
 
     loadSession()
 
