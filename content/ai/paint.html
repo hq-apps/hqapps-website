@@ -86,10 +86,10 @@ draft: false
 
     async function doImgAI(prompt) {
 
-        /*if (!session || session.split("_")[0] <= Date.now()) {
+        if (!session || session.split("_")[0] <= Date.now()) {
             await getSession()
             console.log("captcha done")
-        }*/
+        }
 
         const requestBody = {
             "product": product,
