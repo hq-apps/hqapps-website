@@ -47,6 +47,11 @@ draft: false
     <!-- Current model indicator -->
     <span class="current-model">Current Model: <span class="current-model-name">HQ Chad</span></span>
   </div>
+  <div>
+    <button class="button-71" onclick="DownloadChatAsFile()">Download Chat File</button>
+    <br><br>
+    <button class="button-53" onclick="importchatfile()">Import Chat File</button>
+  </div>
 </div>
 
 <div class="hqaitoolbar">
@@ -117,6 +122,8 @@ draft: false
     hqchadmistral: "HQ Chad idk",
     meow: "meow"
   }
+
+  let chattitle = ""
 
   function snedmessage(from, message) {
     const chatinfo = document.querySelector(".chat-info")
@@ -365,6 +372,7 @@ draft: false
     const chatinfo = document.querySelector(".chat-info")
     chatinfo.style.display = "flex"
     addRandomSuggestions()
+    chattitle = ""
     currentChatId = crypto.randomUUID()
   }
 
@@ -379,6 +387,7 @@ draft: false
     document.querySelector(`.chats-panel .chat-${id}`).classList.add("current")
     loadChat(JSON.parse(localStorage.getItem("chat_" + id)))
     currentChatId = id
+    chattitle  = localStorage.getItem("name_chat_" + id) || ""
   }
 
   async function saveChat() {
@@ -389,6 +398,7 @@ draft: false
     if(!name) {
       name = await doAI(JSON.stringify(HQAImessages), {askfortitle: true})
       localStorage.setItem("name_chat_" + currentChatId, name)
+      chattitle = name
     }
     loadChatSidebar()
     document.querySelector(".chats-panel .current")?.classList.remove("current") || null
@@ -548,9 +558,52 @@ function escapeHtml(unsafe) {
 
 
 
+function DownloadChatAsFile() {
+  const filecontent = {
+    "version": "1",
+    "type": "hqchadchat",
+    "title": chattitle || "new chat",
+    "chat": HQAImessages
+  }
+  const filename = chattitle.replace(/[\W]+/g,"-") || "conversation";
+  const link = document.createElement("a")
+  link.download = `${filename}-${Date.now()}.hqchat`
+  link.href = `data:application/json;base64,${btoa(JSON.stringify(filecontent))}`
+  link.click()
+}
 
+function importchatfile() {
+  const fileinput = document.createElement("input")
+  fileinput.type = "file"
+  fileinput.addEventListener("change", e => {
+    var file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.addEventListener("load", e => {
+      const contents = e.target.result
+      const jsonContent = JSON.parse(contents)
+      if(!jsonContent) {
+        alert("invalid file error issue")
+        return
+      }
+      if(jsonContent.chat == [] || !jsonContent.chat) {
+        alert("empty chat")
+        return
+      }
+      const importid = crypto.randomUUID()
+      localStorage.setItem("chat_" + importid, JSON.stringify(jsonContent.chat))
+      localStorage.setItem("name_chat_" + importid, jsonContent.title || "new chat")
+      localStorage.setItem("date_chat_" + importid, Date.now())
+      loadChatSidebar()
+      console.log(jsonContent)
+    })
+    reader.readAsText(file);
 
-
+  }) 
+  fileinput.click()
+}
 
 
 </script>
