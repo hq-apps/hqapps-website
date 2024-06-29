@@ -568,7 +568,7 @@ function DownloadChatAsFile() {
   const filename = chattitle.replace(/[\W]+/g,"-") || "conversation";
   const link = document.createElement("a")
   link.download = `${filename}-${Date.now()}.hqchat`
-  link.href = `data:application/json;base64,${btoa(JSON.stringify(filecontent))}`
+  link.href = `data:application/json,${encodeURIComponent(JSON.stringify(filecontent))}`
   link.click()
 }
 
