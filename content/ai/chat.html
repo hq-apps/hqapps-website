@@ -295,6 +295,7 @@ draft: false
     }
     const data = JSON.parse(event.data);
     try {
+      console.log(JSON.parse(data.response))
       streamText += JSON.parse(data.response).choices[0].delta.content || ""
     } catch {
       streamText += data.response || ""
