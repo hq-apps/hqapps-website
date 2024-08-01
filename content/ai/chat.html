@@ -294,7 +294,12 @@ draft: false
       return;
     }
     const data = JSON.parse(event.data);
-    streamText += data.response || ""
+    try {
+      streamText += JSON.parse(data.response).choices[0].delta || ""
+    } catch {
+      streamText += data.response || ""
+    }
+    
     if (streamMsg) {
       streamMsg.innerHTML = DOMPurify.sanitize(marked.parse(escapeHtml(streamText)))
       HQAImessages[HQAImessages.length-1].content += data.response
