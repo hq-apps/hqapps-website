@@ -294,10 +294,9 @@ draft: false
       return;
     }
     const data = JSON.parse(event.data);
-    try {
-      console.log(data.response)
-      streamText += JSON.parse(data.response).choices[0].delta.content || ""
-    } catch {
+    if(data.choices) {
+      streamText += data.choices[0].delta.content || ""
+    } else {
       streamText += data.response || ""
     }
     
