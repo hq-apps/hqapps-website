@@ -23,11 +23,11 @@ draft: false
       <button class="model-switch-button">Switch Model</button>
       <ul class="model-list-dropdown">
         <li data-model="hqchadlightningv2">
-          <span>HQ Chad Ultimate Lightning Instant Plus V2 generation+ <br><small style="color: darkgray">Built with Meta Llama 3</small></span>
+          <span>HQ Chad Ultimate Lightning Instant Plus V2 generation+ <br><small style="color: darkgray">Built with Meta Llama</small></span>
           <i class="fas fa-info-circle"></i>
         </li>
         <li data-model="hqchadsmartv2">
-          <span>HQ Chad Ultimate V2 generation plus Max Pro+ 5G <br><small style="color: darkgray">Built with Meta Llama 3</small></span>
+          <span>HQ Chad Ultimate V2 generation plus Max Pro+ 5G <br><small style="color: darkgray">Built with Meta Llama</small></span>
           <i class="fas fa-info-circle"></i>
         </li>
         <li data-model="hqchadlightning">
@@ -143,8 +143,8 @@ draft: false
     meow: "meow",
     hqchadlightning: "HQ Chad Ultimate Lightning Instant Plus",
     hqchadsmart: "HQ Chad Ultimate 4090 Ti Titanium Max Pro+ 5G",
-    hqchadlightningv2: "HQ Chad Ultimate Lightning Instant Plus V2 generation+",
-    hqchadsmartv2: "HQ Chad Ultimate V2 generation plus Max Pro+ 5G",
+    hqchadlightningv2: "HQ Chad Ultimate Lightning Instant Plus V2 generation+ <a href='https://llama.meta.com/llama3_1/license/' target='_blank'>license</a>",
+    hqchadsmartv2: "HQ Chad Ultimate V2 generation plus Max Pro+ 5G <a href='https://llama.meta.com/llama3_1/license/' target='_blank'>license</a>",
     hqchadmixtral: "HQ Chad SE V2"
   }
 
@@ -529,7 +529,7 @@ document.querySelectorAll('.model-list-dropdown li').forEach((item) => {
     console.log(JSON.stringify(event.target.dataset))
 
     // Update the current model indicator
-    currentModelIndicator.textContent = chatproducts[selectedModel];
+    currentModelIndicator.innerHTML = chatproducts[selectedModel];
 
     // Hide the model list dropdown
     modelListDropdown.classList.remove('show');
