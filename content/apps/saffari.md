@@ -50,7 +50,7 @@ websit end downlod!!!: http://saffari.hqapps.org
 discdr!!: hhttps://saffari.hqapps.org/dc
 PLS join!!
 thenc u!</p>
-    <a href="/dl.html"><marquee><button style="font-size: 2em; font-family: 'Anton', sans-serif;">FREE DOWNLOAD</button><button style="font-size: 2em;">FREE DOWNLOAD</button><button style="font-size: 2em;">FREE DOWNLOAD</button><button style="font-size: 2em;">FREE DOWNLOAD</button></marquee></a>
+    <a href="https://saffari.hqapps.org/dl.html"><marquee><button style="font-size: 2em; font-family: 'Anton', sans-serif;">FREE DOWNLOAD</button><button style="font-size: 2em;">FREE DOWNLOAD</button><button style="font-size: 2em;">FREE DOWNLOAD</button><button style="font-size: 2em;">FREE DOWNLOAD</button></marquee></a>
     <p>Flolow us!!</p>
     <a href="https://www.youtube.com/channel/UCqYOLZYAZCqDjNnNuvpcGIw">YUTOOB!</a>
     <h2>What is Saffari???</h2>
