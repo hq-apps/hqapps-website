@@ -14,9 +14,17 @@ draft: false
 
 <p style="text-align: center;">
 <a href="https://www.mediafire.com/file/drtfwq6ayxxea07/winterland.zip/file" target="_blank">
-<button class="dlbutton no">download world!!</button>
+<button class="dlbutton no">download world!! (media fire)</button>
 </a>
 </p>
+
+<center>
+<p style="text-align: center;">
+<a href="https://github.com/hq-apps/cdn/releases/download/winterland1/winterland.zip" target="_blank">
+<button class="dlbutton no">download world mirror (github!!</button>
+</a>
+</p>
+</center>
 
 #### Note: In this version the metro isn't working for some reason.
 
