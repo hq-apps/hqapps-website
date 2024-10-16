@@ -57,7 +57,7 @@ thenc u!</p>
     <h1 style="top:80px"><form method="post" name="newsletter"><input type="hidden" name="form-name" value="newsletter"><input type="email" placeholder="ilike@saffari.tk" name="email"><button type="submit">subscripe to oua nwsalettar (BROKEN)!!!</button></form></h1>
     <p>SAFFARI IS A VERRY GOOD WEB BORWSA WITH FEATURES!:</p>
     <section>
-      <img src="https://saffari.hqapps.org/pw.PNG" height="500" width="500" alt="placeholde">
+      <img src="https://saffari.hqapps.org/pw.png" height="500" width="500" alt="placeholde">
       <div>
         <h2>HIGH SECURIY </h2>
         <p>we at saffari make a relaay gofood jop at make uoa browser goood scurity!!</p>
