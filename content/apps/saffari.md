@@ -4,7 +4,7 @@ date: 2022-08-21T13:11:04+02:00
 draft: false
 hqappid: stable
 icon: /icon.png
-screenshots: [/saffari edd.png.jpg, helo, /hqapps.png, /icon.png, https://saffari.hqapps.org/pw.png]
+screenshots: [/saffari edd.png.jpg, helo, /hqapps.png, /icon.png, https://saffari.hqapps.org/pw.png, https://saffari.hqapps.org/favs.png, https://saffari.hqapps.org/buk.PNG, https://saffari.hqapps.org/20220825_172054.jpeg, https://saffari.hqapps.org/joinn.png]
 download: https://dl.hqapps.org/stable
 ---
 <link
