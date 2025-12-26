@@ -15,4 +15,4 @@ I saw a similar thing at 38C3 with a Linux binary encoded in a QR code (I can't 
 
 ## How?
 
-The (source code)[https://codeberg.org/Lenni/qrcode-exe] is written in x86 assembly and calls some win32 APIs to display the window and open the URL. I'm using a mix of Windows batch scripts and BASH scripts to build the executable and create the QR code. More details on that can be found in the README on Codeberg. 
+The [source code](https://codeberg.org/Lenni/qrcode-exe) is written in x86 assembly and calls some win32 APIs to display the window and open the URL. I'm using a mix of Windows batch scripts and BASH scripts to build the executable and create the QR code. More details on that can be found in the README on Codeberg. 
